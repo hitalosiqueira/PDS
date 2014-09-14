@@ -1,0 +1,7 @@
+#antes de trabalhar
+git pull origin master
+
+#após as alterações
+git add .
+git commit -m "msg"
+git push origin master
