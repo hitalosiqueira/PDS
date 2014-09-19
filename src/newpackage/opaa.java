@@ -11,5 +11,5 @@ package newpackage;
  * @author hitalo
  */
 public class opaa {
-    
+    oiudgoiugougidugdpiugpiu
 }
