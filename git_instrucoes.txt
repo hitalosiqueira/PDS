@@ -5,3 +5,10 @@ git pull origin master
 git add .
 git commit -m "msg"
 git push origin master
+
+
+#caso algum arquivo ou pasta ou for deletado
+git add -u
+git commit -m "msg"
+git push origin master
+
