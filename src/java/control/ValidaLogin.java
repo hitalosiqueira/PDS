@@ -48,13 +48,13 @@ public class ValidaLogin extends HttpServlet {
     //login
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        //capturar o login
-       UsuarioBean objUsuario = new UsuarioBean();
-       objUsuario.setEmail(request.getParameter("login"));
+       Usuario objUsuario = new Usuario();
+       objUsuario.setLogin(request.getParameter("login"));
        objUsuario.setSenha(request.getParameter("senha"));
 
          try {
              //checa se o usuario e valido, se for cria session
-             Usuario usuario = new Usuario();
+             UsuarioDAO usuario = new UsuarioDAO();
                
              
              if(usuario.isUsuarioValido(objUsuario,1)){
