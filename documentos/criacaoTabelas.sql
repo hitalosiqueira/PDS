@@ -44,3 +44,9 @@ CREATE TABLE Produtos_Venda(
 	FOREIGN KEY 	(codigo_venda) REFERENCES Venda(codigo) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY 	(codigo_lote) REFERENCES Lote(codigo) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE Usuario(
+	nome_usuario	varchar(50),
+	senha		varchar(6),
+	PRIMARY KEY	(nome_usuario)
+);
