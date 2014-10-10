@@ -53,7 +53,7 @@ public class ConnectionFactory {
         try {
             Class.forName("org.postgresql.Driver");
             String conexao = "jdbc:postgresql://localhost/ERPArrayEnterprises";//AQUI depois do localhost, nome do banco
-            String usuario = "postgres", senha = "root";//user e pass do seu pgadmin
+            String usuario = "postgres", senha = "123";//user e pass do seu pgadmin
 
             Connection conn = DriverManager.getConnection(conexao, usuario, senha);
             return conn;

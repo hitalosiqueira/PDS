@@ -18,7 +18,10 @@
 </head>
 
 <body>
-
+    <%//recupera a sessao
+        HttpSession s = request.getSession(false);
+        String val = (String)s.getAttribute("erro");
+    %>
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -27,16 +30,20 @@
                         <h3 class="panel-title">Login</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" method="post" action="ValidaLogin">
+                            <input type="hidden" name="tipo" value="login">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <% if( val.equals("invalido") ) { %>
+                                    <div class="alert alert-danger" role="alert"><b>Usuario ou senha invalidos!</b></div>
+                                    <% } %>
+                                    <input class="form-control" placeholder="Entre com seu ID" name="login" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control" placeholder="Senha" name="senha" type="password" value="">
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="main.html" class="btn btn-lg btn-success btn-block">Entrar</a>
+                                <input type="submit" class="btn btn-lg btn-success btn-block" value="Entrar">
                             </fieldset>
                         </form>
                     </div>

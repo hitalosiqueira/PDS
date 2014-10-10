@@ -74,7 +74,7 @@ public class UsuarioDAO {
 
 
         Usuario novo = null;
-        Statement ps = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
         Connection conn = this.conn;
 
@@ -85,9 +85,12 @@ public class UsuarioDAO {
         }
 
         try {
-            String SQL = "SELECT * FROM `Usuario` WHERE `login` = '" + login + "' AND `senha` = '" + senha + "'";
-            ps = conn.createStatement();
-            rs = ps.executeQuery(SQL);
+            String SQL = "SELECT * FROM Usuario WHERE nome_usuario = ? AND senha = ?";
+            ps = conn.prepareStatement(SQL);
+            ps.setString( 1, login );
+            ps.setString( 2, senha );
+            
+            rs = ps.executeQuery();
 
             while (rs.next()) {
                 String loginb = rs.getObject("nome_usuario").toString();
@@ -100,7 +103,7 @@ public class UsuarioDAO {
         } catch (SQLException sqle) {
             throw new DAOException("Erro ao Logar " + sqle);
         } finally {
-            ConnectionFactory.closeConnection(conn, (PreparedStatement) ps);
+            ConnectionFactory.closeConnection(conn, ps);
 
         }
         if (x == 1) {

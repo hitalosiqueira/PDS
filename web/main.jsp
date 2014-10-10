@@ -14,10 +14,18 @@
     
 <head>
     <title>ERP Jabuti</title>
+    <%@page import="model.Usuario"%>
     <%@include file="WEB-INF/jspf/head.jspf"%>
 </head>
 
 <body>
+    <%//recupera a sessao
+        HttpSession s = request.getSession(false);
+        Usuario login = null;
+        if (s != null) {
+            login = (Usuario) s.getAttribute("Usuario");
+        }
+    %>
 
     <div id="wrapper">
 

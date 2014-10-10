@@ -62,12 +62,13 @@ public class ValidaLogin extends HttpServlet {
                  //UsuarioBean user = new UsuarioBean();        
                  //user.setEmail(login);
                  session.setAttribute("Usuario",objUsuario);
-                 response.sendRedirect("index.jsp");
+                 response.sendRedirect("main.jsp");
        
              }else{
-                 //response.sendRedirect("erro.html");
-                 
-                 response.sendRedirect("validacaoerro.jsp");
+                 HttpSession session = request.getSession();
+                 String invalido = "invalido";
+                 session.setAttribute("Usuario",invalido);
+                 response.sendRedirect("index.jsp");                
 
              }
          } catch (DAOException ex) {

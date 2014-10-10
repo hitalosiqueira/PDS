@@ -14,14 +14,21 @@
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                <i class="fa fa-user fa-fw"></i><b><%= login.getLogin() %></b><i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <li>
+                    <i class="fa fa-gear fa-fw"></i>
+                    <button class="btn btn-default btn-xs"> Configuracoes</button>
                 </li>
                 <li class="divider"></li>
-                <li><a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                </li>
+                <form method="post" action="ValidaLogin">
+                    <input type="hidden" name="tipo" value="logout">
+                    <li>
+                        <i class="fa fa-sign-out fa-fw"></i>
+                        <input class="btn btn-default btn-xs" type="submit" value="Logout">
+                    </li>
+                </form>
             </ul>
             <!-- /.dropdown-user -->
         </li>
