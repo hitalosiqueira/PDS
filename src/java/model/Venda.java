@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,6 +17,6 @@ public class Venda {
     
     private int codigo_cliente;
     
-    private ArrayList<Produto> produtos; 
+    private List<Produto> produtos; 
     
 }

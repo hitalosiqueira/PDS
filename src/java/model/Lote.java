@@ -17,9 +17,9 @@ public class Lote {
     
     private int codigo_produto;
     
-    private Date dt_fabricacao;
+    private String dt_fabricacao;
     
-    private Date dt_validade;
+    private String dt_validade;
     
     private int qtde_inicial;
     

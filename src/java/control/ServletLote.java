@@ -44,7 +44,7 @@ public class ServletLote extends HttpServlet {
             
             LoteDAO lotedao = new LoteDAO();
             List<Lote> lotes = null;
-            lotes = lotedao.buscaLote(codigo, codigo_produto, dt_fabricacao, dt_validade);
+            lotes = lotedao.buscaLote(codigo, codigo_produto);
             
             request.setAttribute("listLotes", lotes);
         }catch(DAOException e){
