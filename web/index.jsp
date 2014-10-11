@@ -14,13 +14,17 @@
 
 <head>
     <title>ERP Jabuti</title>
+    <%@page import="model.Usuario"%>
     <%@include file="WEB-INF/jspf/head.jspf"%>
 </head>
 
 <body>
     <%//recupera a sessao
         HttpSession s = request.getSession(false);
-        String val = (String)s.getAttribute("erro");
+        Usuario login = null;
+        if (s != null) {
+            login = (Usuario) s.getAttribute("Usuario");
+        }
     %>
     <div class="container">
         <div class="row">
@@ -34,9 +38,9 @@
                             <input type="hidden" name="tipo" value="login">
                             <fieldset>
                                 <div class="form-group">
-                                    <% if( val.equals("invalido") ) { %>
+                                    <% if( login != null && !login.getAutorizado() ) { %>
                                     <div class="alert alert-danger" role="alert"><b>Usuario ou senha invalidos!</b></div>
-                                    <% } %>
+                                    <%  } %>
                                     <input class="form-control" placeholder="Entre com seu ID" name="login" type="text" autofocus>
                                 </div>
                                 <div class="form-group">

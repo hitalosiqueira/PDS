@@ -12,6 +12,7 @@ public class Usuario {
 
     private String senha;
     private String login;
+    private boolean autorizado;
     /* 
      *  *  private String login;
      * public String getLogin() {
@@ -46,6 +47,14 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    
+    public boolean getAutorizado() {
+        return autorizado;
+    }
+
+    public void setAutorizado(boolean autorizado) {
+        this.autorizado = autorizado;
     }
 }
 

@@ -55,19 +55,18 @@ public class ValidaLogin extends HttpServlet {
          try {
              //checa se o usuario e valido, se for cria session
              UsuarioDAO usuario = new UsuarioDAO();
-               
+             
+             HttpSession session = request.getSession();//cria uma sessao(se tiver outra ele destroi)
+                 //UsuarioBean user = new UsuarioBean();        
+                 //user.setEmail(login);               
              
              if(usuario.isUsuarioValido(objUsuario,1)){
-                 HttpSession session = request.getSession();//cria uma sessao(se tiver outra ele destroi)
-                 //UsuarioBean user = new UsuarioBean();        
-                 //user.setEmail(login);
                  session.setAttribute("Usuario",objUsuario);
                  response.sendRedirect("main.jsp");
        
              }else{
-                 HttpSession session = request.getSession();
-                 String invalido = "invalido";
-                 session.setAttribute("Usuario",invalido);
+                 objUsuario.setAutorizado(false);
+                 session.setAttribute("Usuario",objUsuario);
                  response.sendRedirect("index.jsp");                
 
              }
