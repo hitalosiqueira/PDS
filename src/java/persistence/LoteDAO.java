@@ -35,8 +35,8 @@ public class LoteDAO {
 
                 l.setCodigo(resultado.getInt("codigo"));
                 l.setCodigo_produto(resultado.getInt("codigo_produto"));
-                l.setDt_fabricacao(resultado.getString("dt_fabricacao"));
-                l.setDt_validade(resultado.getString("dt_validade"));
+                l.setDt_fabricacao(resultado.getDate("dt_fabricacao"));
+                l.setDt_validade(resultado.getDate("dt_validade"));
                 l.setQtde_inicial(resultado.getInt("qtde_inicial"));
                 l.setQtde_atual(resultado.getInt("qtde_atual"));
                 lista.add(l);
@@ -58,7 +58,7 @@ public class LoteDAO {
         try {
             PreparedStatement p = c.prepareStatement(sql);
             p.setInt(1,codigo);
-            p.setString(2, dt_validade);
+            p.setDate(2, java.sql.Date.valueOf(dt_validade));
             ResultSet resultado = p.executeQuery();
 
             while (resultado.next()) {
@@ -66,8 +66,8 @@ public class LoteDAO {
 
                 l.setCodigo(resultado.getInt("codigo"));
                 l.setCodigo_produto(resultado.getInt("codigo_produto"));
-                l.setDt_fabricacao(resultado.getString("dt_fabricacao"));
-                l.setDt_validade(resultado.getString("dt_validade"));
+                l.setDt_fabricacao(resultado.getDate("dt_fabricacao"));
+                l.setDt_validade(resultado.getDate("dt_validade"));
                 l.setQtde_inicial(resultado.getInt("qtde_inicial"));
                 l.setQtde_atual(resultado.getInt("qtde_atual"));
                 lista.add(l);

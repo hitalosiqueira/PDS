@@ -15,8 +15,8 @@ public class Lote {
 
     private int codigo;
     private int codigo_produto;
-    private String dt_fabricacao;
-    private String dt_validade;
+    private Date dt_fabricacao;
+    private Date dt_validade;
     private int qtde_inicial;
     private int qtde_atual;
 
@@ -36,19 +36,19 @@ public class Lote {
         this.codigo_produto = codigo_produto;
     }
 
-    public String getDt_fabricacao() {
+    public Date getDt_fabricacao() {
         return dt_fabricacao;
     }
 
-    public void setDt_fabricacao(String dt_fabricacao) {
+    public void setDt_fabricacao(Date dt_fabricacao) {
         this.dt_fabricacao = dt_fabricacao;
     }
 
-    public String getDt_validade() {
+    public Date getDt_validade() {
         return dt_validade;
     }
 
-    public void setDt_validade(String dt_validade) {
+    public void setDt_validade(Date dt_validade) {
         this.dt_validade = dt_validade;
     }
 

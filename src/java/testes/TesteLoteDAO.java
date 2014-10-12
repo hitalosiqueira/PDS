@@ -7,6 +7,7 @@ package testes;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Lote;
 import persistence.DAOException;
@@ -31,8 +32,8 @@ public class TesteLoteDAO {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println(lista.get(i).getCodigo());
             System.out.println(lista.get(i).getCodigo_produto());
-            System.out.println(lista.get(i).getDt_fabricacao());
-            System.out.println(lista.get(i).getDt_validade());
+            System.out.println(lista.get(i).getDt_fabricacao().toString());
+            System.out.println(lista.get(i).getDt_validade().toString());
             System.out.println(lista.get(i).getQtde_inicial());
             System.out.println(lista.get(i).getQtde_atual());
             System.out.println();
