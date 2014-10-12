@@ -49,8 +49,5 @@ public class Cliente {
 
     public void setEsp_ramo(String esp_ramo) {
         this.esp_ramo = esp_ramo;
-    }
-    
-    
-    
+    }   
 }

@@ -4,6 +4,7 @@
     Author     : daniel
 --%>
 
+<%@page import="model.Cliente"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Usuario"%>
@@ -137,7 +138,27 @@
                                         <tbody>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-success pull-right">Finalizar Venda</button>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="pull-left" style="margin-top: 7px;">Selecione o cliente:</div>
+                                            <select class="form-control" style="width: 200px;">
+                                                <%
+                                                    List<Cliente> clientes = (List<Cliente>) request.getAttribute("listClientes");
+                                                    if (!clientes.isEmpty()) {
+                                                        for (Iterator iterator = clientes.iterator(); iterator.hasNext();) {
+                                                            Cliente cli = (Cliente) iterator.next();
+                                                %>
+                                                <option value="<%=cli.getCodigo()%>"><%=cli.getNome()%></option>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-success pull-right">Finalizar Venda</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
