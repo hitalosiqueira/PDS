@@ -40,17 +40,10 @@ public class ServletLote extends HttpServlet {
        String dt_fabricacao = request.getParameter("dt_fabricacao");
        String qtde_inicial = request.getParameter("qtde_inicial");
        String qtde_atual = request.getParameter("qtde_atual");
-        try{
-            
-            LoteDAO lotedao = new LoteDAO();
-            List<Lote> lotes = null;
-            lotes = lotedao.buscaLote(codigo, codigo_produto);
-            
-            request.setAttribute("listLotes", lotes);
-        }catch(DAOException e){
-            request.setAttribute("listLotes", null);
-        }
-        
+       LoteDAO lotedao = new LoteDAO();
+       List<Lote> lotes = null;
+       request.setAttribute("listLotes", lotes);
+       
         RequestDispatcher rd = null;
 	rd = request.getRequestDispatcher("/viewLotes.jsp");
 	rd.forward(request, response);

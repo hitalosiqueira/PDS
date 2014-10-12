@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
@@ -19,58 +19,67 @@ import model.*;
  * @author daniel
  */
 public class LoteDAO {
-    
-    private Connection conn;
-    
-    public LoteDAO() throws DAOException {
-        try {
-            this.conn = ConnectionFactory.getConnection();
 
-        } catch (Exception e) {
-            throw new DAOException("Erro:\n" + e.getMessage());
-        }
-    }
-    
-    public List<Lote> buscaLote(String codigo, String codigo_produto)
-            throws SQLException, DAOException{
-        
-        
-        List<Lote> lotes = new ArrayList<Lote>();
-        
-        Statement statement = null;
-	Connection conn = this.conn;
-        PreparedStatement ps = null;
-        ResultSet set;
-        String SQL = null;
-        
+    private Connection c = ConnectionFactory.getConexao();
+
+    public List<Lote> buscaTodos() {
+        String sql = "SELECT * FROM lote";
+        List<Lote> lista = new ArrayList<>();
+
         try {
-            SQL = "SELECT * FROM lote WHERE lote.codigo = ? AND lote.codigo_produto = ?";
-            ps = conn.prepareStatement(SQL);
-            ps.setString( 1, codigo );
-            ps.setString( 2, codigo_produto );
-            
-            set = ps.executeQuery();
-            while(set.next()){
-                Lote result = new Lote();
-                
-                result.setCodigo(Integer.parseInt(set.getObject("codigo").toString()));
-                result.setCodigo_produto(Integer.parseInt(set.getObject("codigo_produto").toString()));
-                result.setDt_fabricacao(set.getObject("dt_fabricacao").toString());
-                result.setDt_validade(set.getObject("dt_validade").toString());
-                result.setQtde_atual(Integer.parseInt(set.getObject("qtde_atual").toString()));
-                result.setQtde_inicial(Integer.parseInt(set.getObject("qtde_inicial").toString()));
-                
-                lotes.add(result);
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet resultado = p.executeQuery();
+
+            while (resultado.next()) {
+                Lote l = new Lote();
+
+                l.setCodigo(resultado.getInt("codigo"));
+                l.setCodigo_produto(resultado.getInt("codigo_produto"));
+                l.setDt_fabricacao(resultado.getString("dt_fabricacao"));
+                l.setDt_validade(resultado.getString("dt_validade"));
+                l.setQtde_inicial(resultado.getInt("qtde_inicial"));
+                l.setQtde_atual(resultado.getInt("qtde_atual"));
+                lista.add(l);
             }
-            
+            p.close();
+            System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
         }
-        catch(SQLException sqle){
-            throw new DAOException("Erro ao buscar dados " );
-        }finally{
-            ConnectionFactory.closeConnection(conn, ps);
+
+        return lista;
+    }
+    
+        public List<Lote> buscaCodProdutoValidade(int codigo, String dt_validade) {
+        String sql = "SELECT * FROM lote where codigo = ? and dt_validade = ?";
+        List<Lote> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+            p.setInt(1,codigo);
+            p.setString(2, dt_validade);
+            ResultSet resultado = p.executeQuery();
+
+            while (resultado.next()) {
+                Lote l = new Lote();
+
+                l.setCodigo(resultado.getInt("codigo"));
+                l.setCodigo_produto(resultado.getInt("codigo_produto"));
+                l.setDt_fabricacao(resultado.getString("dt_fabricacao"));
+                l.setDt_validade(resultado.getString("dt_validade"));
+                l.setQtde_inicial(resultado.getInt("qtde_inicial"));
+                l.setQtde_atual(resultado.getInt("qtde_atual"));
+                lista.add(l);
+            }
+            p.close();
+            System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
         }
-        return lotes;
+
+        return lista;
     }
 
-    
 }

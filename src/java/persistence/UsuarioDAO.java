@@ -22,7 +22,7 @@ public class UsuarioDAO {
 
     public UsuarioDAO() throws DAOException {
         try {
-            this.conn = ConnectionFactory.getConnection();
+            this.conn = ConnectionFactory.getConexao();
 
         } catch (Exception e) {
             throw new DAOException("Erro:\n" + e.getMessage());
@@ -67,7 +67,7 @@ public class UsuarioDAO {
 //        }
 //    }// fim salvar
 
-    public boolean isUsuarioValido(Usuario usuario, int x) throws DAOException {
+    public boolean isUsuarioValido(Usuario usuario, int x) throws DAOException, SQLException {
 
         String login = usuario.getLogin();
         String senha = usuario.getSenha();
@@ -103,7 +103,7 @@ public class UsuarioDAO {
         } catch (SQLException sqle) {
             throw new DAOException("Erro ao Logar " + sqle);
         } finally {
-            ConnectionFactory.closeConnection(conn, ps);
+            ps.close();
 
         }
         if (x == 1) {

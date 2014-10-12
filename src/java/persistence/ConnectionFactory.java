@@ -10,63 +10,31 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author daniel
  */
 public class ConnectionFactory {
-
-    public static void closeConnection(Connection conn, PreparedStatement ps, ResultSet rs)
-            throws DAOException {
-        close(conn, ps, rs);
-    }
-
-    public static void closeConnection(Connection conn, PreparedStatement ps)
-            throws DAOException {
-        close(conn, ps, null);
-    }
-
-    public static void closeConnection(Connection conn)
-            throws DAOException {
-        close(conn, null, null);
-    }
-
-    private static void close(Connection conn, PreparedStatement ps, ResultSet rs)
-            throws DAOException {
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException exception) {
-            throw new DAOException(exception.getMessage(), exception.fillInStackTrace());
-        }
-    }
-
-    public static Connection getConnection() throws DAOException {
+    
+    static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/ERPArrayEnterprises";
+    
+    public static Connection getConexao(){
+        Connection conn = null;
+        
         try {
             Class.forName("org.postgresql.Driver");
-            String conexao = "jdbc:postgresql://localhost/ERPArrayEnterprises";//AQUI depois do localhost, nome do banco
-            String usuario = "postgres", senha = "123";//user e pass do seu pgadmin
-
-            Connection conn = DriverManager.getConnection(conexao, usuario, senha);
-            return conn;
-        } catch (SQLException exception) {
-            throw new DAOException(exception.getMessage(), exception.fillInStackTrace());
-        } catch (ClassNotFoundException exception) {
-            throw new DAOException(exception.getMessage(), exception.fillInStackTrace());
-            /*
-             } catch (InstantiationException exception) {
-             throw new DAOException(exception.getMessage(), exception.fillInStackTrace());
-             } catch (IllegalAccessException exception) {
-             throw new DAOException(exception.getMessage(), exception.fillInStackTrace());
-             */
+            conn = DriverManager.getConnection(DATABASE_URL,"postgres","14785");
+            System.out.println("Conexão feita com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("Falha na Conexão");
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return conn;
     }
 }

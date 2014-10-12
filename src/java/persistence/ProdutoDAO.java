@@ -26,7 +26,7 @@ public class ProdutoDAO {
     
     public ProdutoDAO() throws DAOException {
         try {
-            this.conn = ConnectionFactory.getConnection();
+            this.conn = ConnectionFactory.getConexao();
 
         } catch (Exception e) {
             throw new DAOException("Erro:\n" + e.getMessage());
