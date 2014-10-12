@@ -15,6 +15,7 @@ import model.*;
 import persistence.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 
 /**
  *
@@ -68,7 +69,9 @@ public class ValidaLogin extends HttpServlet {
              
              if(usuario.isUsuarioValido(objUsuario,1)){
                  session.setAttribute("Usuario",objUsuario);
-                 response.sendRedirect("main.jsp");
+                 RequestDispatcher rd = request.getRequestDispatcher("/ServletProduto");
+                 rd.forward(request, response);
+                 //response.sendRedirect("/ServletProduto");
        
              }else{
                  objUsuario.setAutorizado(false);

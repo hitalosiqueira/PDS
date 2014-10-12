@@ -4,6 +4,10 @@
     Author     : daniel
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Usuario"%>
+<%@page import="model.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -14,7 +18,6 @@
 
     <head>
         <title>ERP Jabuti</title>
-        <%@page import="model.Usuario"%>
         <%@include file="WEB-INF/jspf/head.jspf"%>
     </head>
 
@@ -120,43 +123,32 @@
                                     <table class="display" id="TableProdutos">
                                         <thead>
                                             <tr>
-                                                <th>#Premio</th>
-                                                <th>Jogador(id):</th>
-                                                <th>Ano</th>
-                                                <th>Valor</th>
+                                                <th>#Código</th>
+                                                <th>Nome</th>
+                                                <th>Qtde. disponível</th>
+                                                <th>Sel. quantidade</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <%
+                                                List<Produto> produtos = (List<Produto>) request.getAttribute("listProdutos");
+                                                if (!produtos.isEmpty()) {
+                                                    for (Iterator iterator = produtos.iterator(); iterator.hasNext();) {
+                                                        Produto produto = (Produto) iterator.next();
+                                            %>
                                             <tr class="gradeA">
-                                                <td>lalala</td>
-                                                <td><a href="#">lalala</a></td>
-                                                <td>lalala</td>
-                                                <td>lalala</td>
+                                                <td><%=produto.getCodigo()%></td>
+                                                <td><%=produto.getNome()%></td>
+                                                <td></td>
+                                                <td>
+                                                    <input type="number" id="QtdeProd" min="0" max="100" value="1">
+                                                    <button type="button" class="btn btn-primary btn-xs">Add. Produto >></button>
+                                                </td>
                                             </tr>
-                                            <tr class="gradeA">
-                                                <td>lalala</td>
-                                                <td><a href="#">lalala</a></td>
-                                                <td>lalalasda</td>
-                                                <td>lalala</td>
-                                            </tr>
-                                            <tr class="gradeA">
-                                                <td>lalala</td>
-                                                <td><a href="#">lalala</a></td>
-                                                <td>lalala</td>
-                                                <td>lalala</td>
-                                            </tr>
-                                            <tr class="gradeA">
-                                                <td>lalala</td>
-                                                <td><a href="#">lalala</a></td>
-                                                <td>lalala</td>
-                                                <td>lalala</td>
-                                            </tr>
-                                            <tr class="gradeA">
-                                                <td>lalala</td>
-                                                <td><a href="#">lalala</a></td>
-                                                <td>lalala</td>
-                                                <td>lalala</td>
-                                            </tr>
+                                            <%
+                                                    }
+                                                }
+                                            %>
                                         </tbody>
                                     </table>
                                 </div>
