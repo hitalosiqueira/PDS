@@ -21,5 +21,12 @@ $(document).ready(function(){
         $("#VendasEfetuadas").fadeIn('slow');
     });
     
-    $('#TableProdutos').dataTable();
+    $('#TableProdutos').dataTable({
+        paging: false,
+        info: false,
+        ordering: false,
+        "language": {
+            "search": "Filtre um produto:"
+          }
+    });
 });

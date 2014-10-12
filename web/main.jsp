@@ -28,7 +28,7 @@
         %>
 
         <div id="wrapper">
-            
+
             <%@include file="WEB-INF/jspf/navigation.jspf"%>
 
             <div id="page-wrapper">
@@ -110,74 +110,70 @@
                     </div>
                     <!-- /.row -->
                     <div class="row">
+
                         <div class="col-lg-6">
-                            <div class="table-responsive">
-                                <label>Produtos</label>
-                                <table class="table table-striped table-bordered table-hover dataTable" id="TableProdutos">
-                                    <thead>
-                                        <tr>
-                                            <th>#Premio</th>
-                                            <th>Jogador(id):</th>
-                                            <th>Ano</th>
-                                            <th>Valor</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Produtos</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="display" id="TableProdutos">
+                                        <thead>
+                                            <tr>
+                                                <th>#Premio</th>
+                                                <th>Jogador(id):</th>
+                                                <th>Ano</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="gradeA">
+                                                <td>lalala</td>
+                                                <td><a href="#">lalala</a></td>
+                                                <td>lalala</td>
+                                                <td>lalala</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>lalala</td>
+                                                <td><a href="#">lalala</a></td>
+                                                <td>lalalasda</td>
+                                                <td>lalala</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>lalala</td>
+                                                <td><a href="#">lalala</a></td>
+                                                <td>lalala</td>
+                                                <td>lalala</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>lalala</td>
+                                                <td><a href="#">lalala</a></td>
+                                                <td>lalala</td>
+                                                <td>lalala</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>lalala</td>
+                                                <td><a href="#">lalala</a></td>
+                                                <td>lalala</td>
+                                                <td>lalala</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Itens na Venda</h3>
+                                </div>
+                                <div class="panel-body">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /#wrapper -->
-
-            <!-- jQuery Version 1.11.0 -->
-            <script src="js/jquery-1.11.0.js"></script>
-
-            <!-- Bootstrap Core JavaScript -->
-            <script src="js/bootstrap.min.js"></script>
-
-            <!-- Metis Menu Plugin JavaScript -->
-            <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
-
-            <!-- Morris Charts JavaScript -->
-            <script src="js/plugins/morris/raphael.min.js"></script>
-            <script src="js/plugins/morris/morris.min.js"></script>
-            <script src="js/plugins/morris/morris-data.js"></script>
-
-            <!-- Custom Theme JavaScript -->
-            <script src="js/sb-admin-2.js"></script>
-
     </body>
 </html>
