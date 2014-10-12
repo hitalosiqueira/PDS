@@ -29,15 +29,10 @@ public class ServletProduto extends HttpServlet {
     private void busca(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
-        try {
-            ProdutoDAO produtodao = new ProdutoDAO();
-            List<Produto> produto = null;
-
-            produto = produtodao.buscaProduto();
-            request.setAttribute("listProdutos", produto);
-        } catch (DAOException e) {
-            request.setAttribute("listproduto", null);
-        }
+        ProdutoDAO produtodao = new ProdutoDAO();
+        List<Produto> produto = null;
+        produto = produtodao.buscaTodos();
+        request.setAttribute("listProdutos", produto);
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("/main.jsp");

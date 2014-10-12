@@ -62,42 +62,6 @@
                                             <td>32.3%</td>
                                             <td>$321.33</td>
                                         </tr>
-                                        <tr>
-                                            <td>/about.html</td>
-                                            <td>261</td>
-                                            <td>33.3%</td>
-                                            <td>$234.12</td>
-                                        </tr>
-                                        <tr>
-                                            <td>/sales.html</td>
-                                            <td>665</td>
-                                            <td>21.3%</td>
-                                            <td>$16.34</td>
-                                        </tr>
-                                        <tr>
-                                            <td>/blog.html</td>
-                                            <td>9516</td>
-                                            <td>89.3%</td>
-                                            <td>$1644.43</td>
-                                        </tr>
-                                        <tr>
-                                            <td>/404.html</td>
-                                            <td>23</td>
-                                            <td>34.3%</td>
-                                            <td>$23.52</td>
-                                        </tr>
-                                        <tr>
-                                            <td>/services.html</td>
-                                            <td>421</td>
-                                            <td>60.3%</td>
-                                            <td>$724.32</td>
-                                        </tr>
-                                        <tr>
-                                            <td>/blog/post.html</td>
-                                            <td>1233</td>
-                                            <td>93.2%</td>
-                                            <td>$126.34</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -141,8 +105,8 @@
                                                 <td><%=produto.getNome()%></td>
                                                 <td></td>
                                                 <td>
-                                                    <input type="number" id="QtdeProd" min="0" max="100" value="1">
-                                                    <button type="button" class="btn btn-primary btn-xs">Add. Produto >></button>
+                                                    <input type="number" id="QtdeProd" min="0" max="100" value="1" >
+                                                    <button type="button" class="btn btn-primary btn-xs pull-right" id="BotaoAdd">Add. Produto >></button>
                                                 </td>
                                             </tr>
                                             <%
@@ -160,6 +124,48 @@
                                     <h3 class="panel-title">Itens na Venda</h3>
                                 </div>
                                 <div class="panel-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#Código</th>
+                                                <th>Nome</th>
+                                                <th>Qtde.</th>
+                                                <th>Lote</th>
+                                                <th>Validade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="gradeA">
+                                                <td>x</td>
+                                                <td>produto 1</td>
+                                                <td>10</td>
+                                                <td>123</td>
+                                                <td>10/01/1991</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>x</td>
+                                                <td>produto 1</td>
+                                                <td>10</td>
+                                                <td>123</td>
+                                                <td>10/01/1991</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>x</td>
+                                                <td>produto 1</td>
+                                                <td>10</td>
+                                                <td>123</td>
+                                                <td>10/01/1991</td>
+                                            </tr>
+                                            <tr class="gradeA">
+                                                <td>x</td>
+                                                <td>produto 1</td>
+                                                <td>10</td>
+                                                <td>123</td>
+                                                <td>10/01/1991</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" class="btn btn-success pull-right">Finalizar Venda</button>
                                 </div>
                             </div>
                         </div>
