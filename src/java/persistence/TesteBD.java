@@ -18,7 +18,7 @@ public class TesteBD {
            conn = DriverManager.getConnection(conexao,usuario,senha);
            stmt = conn.createStatement();
 
-  System.out.println("ConexÃ£o OK!!!");
+  System.out.println("ConexÃ£o DanielZAO!!!");
 
            conn.close();
      }

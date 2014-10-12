@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="main.html">ERP Jabuti</a>
+        <a class="navbar-brand" href="main.jsp">ERP Jabuti</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -27,10 +27,10 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a class="active" href="#"><i class="fa fa-table fa-fw"></i> Pedidos Efetuados</a>
+                    <a class="active" href="#" id="BotaoEfetuadas"><i class="fa fa-table fa-fw"></i> Vendas Efetuadas</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-edit fa-fw"></i> Novo pedido</a>
+                    <a href="#" id="BotaoNovo"><i class="fa fa-edit fa-fw"></i> Novo pedido</a>
                 </li>                        
             </ul>
         </div>
@@ -38,3 +38,4 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
+

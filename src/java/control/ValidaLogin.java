@@ -5,6 +5,7 @@
 package control;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,12 +29,17 @@ public class ValidaLogin extends HttpServlet {
      * @param response
      * @throws ServletException
      * @throws IOException
+     * @throws java.sql.SQLException
      */
     @Override
      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tipo=request.getParameter("tipo");
         if (tipo.compareTo("login")==0)
-            login(request,response);
+            try {
+                login(request,response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ValidaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         else if (tipo.compareTo("logout")==0)
             logout(request,response);
     }
@@ -46,7 +52,7 @@ public class ValidaLogin extends HttpServlet {
     }
 
     //login
-    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
        //capturar o login
        Usuario objUsuario = new Usuario();
        objUsuario.setLogin(request.getParameter("login"));
@@ -74,8 +80,4 @@ public class ValidaLogin extends HttpServlet {
              Logger.getLogger(ValidaLogin.class.getName()).log(Level.SEVERE, null, ex);
          }
    }
-    
-    
-    
-    
 }
