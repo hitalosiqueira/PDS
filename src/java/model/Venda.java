@@ -15,7 +15,7 @@ public class Venda {
     
     private int codigo;  
     private int codigo_cliente;
-    private List<Produto> produtos; 
+    private List<String> produtos; 
     private String nome_cliente;
     private int nLote;
     private int quantidade;
@@ -37,13 +37,14 @@ public class Venda {
         this.codigo_cliente = codigo_cliente;
     }
 
-    public List<Produto> getProdutos() {
+    public List<String> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
+    public void setProdutos(List<String> produtos) {
         this.produtos = produtos;
     }
+    
 
     public String getNome_cliente() {
         return nome_cliente;

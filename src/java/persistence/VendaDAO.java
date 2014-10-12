@@ -26,21 +26,21 @@ public class VendaDAO {
     public List<Venda> buscaTodos() {
         String sql = "select pv.codigo_venda as CodigoVenda, c.codigo as CodigoCliente, c.nome as NomeCliente, l.codigo as Lote, p.nome as Produto, pv.quantidade as Quantidade from cliente c, produtos_venda pv, venda v, lote l, produto p where pv.codigo_venda = v.codigo and c.codigo = v.codigo_cliente and pv.codigo_lote = l.codigo and l.codigo_produto = p.codigo order by p.nome;";
         List<Venda> lista = new ArrayList<>();
-        List<Produto> listaProd = new ArrayList<>();
+        List<String> listaProd = new ArrayList<>();
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
             ResultSet resultado = p.executeQuery();
+            int i = 0;
             while (resultado.next()) {
                 Venda v = new Venda();
-                Produto prod = new Produto();
+                String prod = new String();
                 
                 v.setCodigo(resultado.getInt("CodigoVenda"));
                 v.setCodigo_cliente(resultado.getInt("CodigoCliente"));
                 v.setNome_cliente(resultado.getString("NomeCliente"));
                 v.setnLote(resultado.getInt("Lote"));
-                prod.setNome(resultado.getString("Produto"));
-                listaProd.add(prod);
+                listaProd.add(resultado.getString("Produto"));
                 v.setProdutos(listaProd);
                 v.setQuantidade(resultado.getInt("Quantidade"));
                 lista.add(v);
@@ -57,9 +57,9 @@ public class VendaDAO {
     }
 
     public List<Venda> buscaId(int Id) {
-        String sql = "select pv.codigo_venda as CodigoVenda, c.codigo as CodigoCliente, c.nome as NomeCliente, l.codigo as Lote, p.nome as Produto, pv.quantidade as Quantidade from cliente c, produtos_venda pv, venda v, lote l, produto p where pv.codigo_venda = v.codigo and c.codigo = v.codigo_cliente and pv.codigo_lote = l.codigo and l.codigo_produto = p.codigo order by p.nome;";
+        String sql = "select pv.codigo_venda as CodigoVenda, c.codigo as CodigoCliente, c.nome as NomeCliente, l.codigo as Lote, p.nome as Produto, pv.quantidade as Quantidade from cliente c, produtos_venda pv, venda v, lote l, produto p where pv.codigo_venda = ? and pv.codigo_venda = v.codigo and c.codigo = v.codigo_cliente and pv.codigo_lote = l.codigo and l.codigo_produto = p.codigo order by p.nome; ";
         List<Venda> lista = new ArrayList<>();
-        List<Produto> listaProd = new ArrayList<>();
+        List<String> listaProd = new ArrayList<>();
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
@@ -68,13 +68,13 @@ public class VendaDAO {
             while (resultado.next()) {
                 Venda v = new Venda();
                 Produto prod = new Produto();
+   
                 
                 v.setCodigo(resultado.getInt("CodigoVenda"));
                 v.setCodigo_cliente(resultado.getInt("CodigoCliente"));
                 v.setNome_cliente(resultado.getString("NomeCliente"));
                 v.setnLote(resultado.getInt("Lote"));
-                prod.setNome(resultado.getString("Produto"));
-                listaProd.add(prod);
+                listaProd.add(resultado.getString("Produto"));
                 v.setProdutos(listaProd);
                 v.setQuantidade(resultado.getInt("Quantidade"));
                 lista.add(v);
