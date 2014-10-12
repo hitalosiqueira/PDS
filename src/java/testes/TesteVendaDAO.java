@@ -28,14 +28,14 @@ public class TesteVendaDAO {
         List<Venda> lista = new ArrayList<Venda>();
         VendaDAO l = new VendaDAO();
 
-        lista = l.buscaTodos();
+        lista = l.buscaId(2);
         int j = 0;
         for (int i = 0; i < lista.size(); i++) {
             System.out.println(lista.get(i).getCodigo());
             System.out.println(lista.get(i).getCodigo_cliente());
             System.out.println(lista.get(i).getNome_cliente());
             System.out.println(lista.get(i).getnLote());
-            System.out.println(lista.get(i).getProdutos().get(j).getNome());
+            System.out.println(lista.get(i).getProdutos().get(j));
             System.out.println(lista.get(i).getQuantidade());
             System.out.println();
             System.out.println();
