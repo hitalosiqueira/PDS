@@ -9,14 +9,15 @@ package model;
  *
  * @author daniel
  */
-public class Produto {
-
-    
+public class Cliente {
     
     private int codigo;
+    
     private String nome;
     
-    //metodos
+    private String ramo;
+    
+    private String esp_ramo;
     
     public int getCodigo() {
         return codigo;
@@ -33,5 +34,23 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getRamo() {
+        return ramo;
+    }
+
+    public void setRamo(String ramo) {
+        this.ramo = ramo;
+    }
+
+    public String getEsp_ramo() {
+        return esp_ramo;
+    }
+
+    public void setEsp_ramo(String esp_ramo) {
+        this.esp_ramo = esp_ramo;
+    }
+    
+    
     
 }
