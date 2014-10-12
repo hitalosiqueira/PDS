@@ -7,6 +7,7 @@
 --DROP TABLE Venda;
 --DROP TABLE Cliente;
 --DROP TABLE Produto;
+--DROP TABLE Usuario;
 
 CREATE TABLE Produto(
 	codigo		INT PRIMARY KEY,
@@ -29,8 +30,8 @@ CREATE TABLE Venda(
 CREATE TABLE Lote(
 	codigo		INT PRIMARY KEY,
 	codigo_produto	INT,
-	dt_fabricacao	DATE,
-	dt_validade	DATE,
+	dt_fabricacao	VARCHAR(10),
+	dt_validade	VARCHAR(10),
 	qtde_inicial	INT,
 	qtde_atual	INT,
 	FOREIGN KEY	(codigo_produto) REFERENCES Produto(codigo) ON DELETE CASCADE ON UPDATE CASCADE
@@ -46,7 +47,7 @@ CREATE TABLE Produtos_Venda(
 );
 
 CREATE TABLE Usuario(
-	nome_usuario	varchar(50),
-	senha		varchar(6),
+	nome_usuario	VARCHAR(50),
+	senha		VARCHAR(6),
 	PRIMARY KEY	(nome_usuario)
 );
