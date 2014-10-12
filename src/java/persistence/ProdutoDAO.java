@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Lote;
 import model.Produto;
 
 
@@ -22,45 +23,57 @@ import model.Produto;
  */
 public class ProdutoDAO {
     
-    private Connection conn;
-    
-    public ProdutoDAO() throws DAOException {
-        try {
-            this.conn = ConnectionFactory.getConexao();
+     private Connection c = ConnectionFactory.getConexao();
 
-        } catch (Exception e) {
-            throw new DAOException("Erro:\n" + e.getMessage());
+    public List<Produto> buscaTodos() {
+        String sql = "SELECT * FROM produto";
+        List<Produto> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet resultado = p.executeQuery();
+
+            while (resultado.next()) {
+                Produto prod = new Produto();
+                
+                prod.setCodigo(resultado.getInt("codigo"));
+                prod.setNome(resultado.getString("nome"));
+                lista.add(prod);
+            }
+            p.close();
+            System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
         }
+
+        return lista;
     }
     
-    public List<Produto>buscaProduto(String nome)throws SQLException, DAOException {
-        
-        List<Produto> produtos = new ArrayList<Produto>();
-        Statement statement = null;
-	ResultSet set;
-        
-        String SQL = null;
-        
-        SQL = "select * from produto where nome ="+ nome;
-        
-        try {
-			statement = conn.createStatement();
-			set = statement.executeQuery(SQL);
+    public List<Produto> buscaNome(String nome) {
+        String sql = "SELECT * FROM produto where lower(nome) like ?";
+        List<Produto> lista = new ArrayList<>();
 
-			while (set.next()) {
-                            Produto result = new Produto();
-                            //result.setId_jogador((int) set.getObject("id_jogador"));
-                            result.setNome(set.getObject("nome").toString());
-                            result.setCodigo((int)set.getObject("codigo"));
-                            //jogadores.add(result);
-                            produtos.add(result);
-                        }
-                        
-        }catch (SQLException sqle) {
-			throw new DAOException("Erro ao buscar dados " + sqle);
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+            p.setString(1,"%" + nome.toLowerCase() + "%");
+            ResultSet resultado = p.executeQuery();
+
+            while (resultado.next()) {
+                Produto prod = new Produto();
+                
+                prod.setCodigo(resultado.getInt("codigo"));
+                prod.setNome(resultado.getString("nome"));
+                lista.add(prod);
+            }
+            p.close();
+            System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
         }
-        return produtos;
-        
+
+        return lista;
     }
     
 }
