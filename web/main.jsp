@@ -106,7 +106,7 @@
                                                 <td></td>
                                                 <td>
                                                     <input type="number" id="QtdeProd" min="0" max="100" value="1" >
-                                                    <button type="button" class="btn btn-primary btn-xs pull-right" id="BotaoAdd">Add. Produto >></button>
+                                                    <button type="button" class="btn btn-primary btn-xs pull-right BotaoAdd">Add. Produto >></button>
                                                 </td>
                                             </tr>
                                             <%
@@ -124,7 +124,7 @@
                                     <h3 class="panel-title">Itens na Venda</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <table class="table table-striped table-hover">
+                                    <table class="table table-striped table-hover" id="TabelaVenda">
                                         <thead>
                                             <tr>
                                                 <th>#Código</th>
@@ -135,34 +135,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="gradeA">
-                                                <td>x</td>
-                                                <td>produto 1</td>
-                                                <td>10</td>
-                                                <td>123</td>
-                                                <td>10/01/1991</td>
-                                            </tr>
-                                            <tr class="gradeA">
-                                                <td>x</td>
-                                                <td>produto 1</td>
-                                                <td>10</td>
-                                                <td>123</td>
-                                                <td>10/01/1991</td>
-                                            </tr>
-                                            <tr class="gradeA">
-                                                <td>x</td>
-                                                <td>produto 1</td>
-                                                <td>10</td>
-                                                <td>123</td>
-                                                <td>10/01/1991</td>
-                                            </tr>
-                                            <tr class="gradeA">
-                                                <td>x</td>
-                                                <td>produto 1</td>
-                                                <td>10</td>
-                                                <td>123</td>
-                                                <td>10/01/1991</td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                     <button type="button" class="btn btn-success pull-right">Finalizar Venda</button>

@@ -20,6 +20,17 @@ $(document).ready(function () {
         $("#NovaVenda").hide(0.0000001);
         $("#VendasEfetuadas").fadeIn('slow');
     });
+    
+    $(".BotaoAdd").click(function () {
+        var cod = $(this).parent().prev().prev().prev().html();
+        var qtde = $(this).prev().val();
+        var nome = $(this).parent().prev().prev().html();
+        
+        
+
+        var app = "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+qtde+"</td><td>123</td><td>10/01/1991</td></tr>";
+        $('#TabelaVenda').children().next().append(app);
+    });
 
     $('#TableProdutos').dataTable({
         info: false,
