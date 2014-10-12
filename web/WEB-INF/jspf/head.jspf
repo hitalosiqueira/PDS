@@ -6,37 +6,22 @@
 
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- MetisMenu CSS -->
-<link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-<!-- Timeline CSS -->
-<link href="css/plugins/timeline.css" rel="stylesheet">
-
 <!-- Custom CSS -->
 <link href="css/sb-admin-2.css" rel="stylesheet">
-
 <!-- Custom Fonts -->
 <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
 <!-- Main CSS -->
 <link href="css/main.css" rel="stylesheet">
 
 <!-- Jquery -->
-<script src="js/jquery-2.1.1.min.js"></script>
-
-<!-- Bootstrap JS -->
+<script src="js/jquery-1.11.0.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
 <!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="js/datatables/media/css/jquery.dataTables.css">
-
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="js/datatables/media/js/jquery.js"></script>
-
+<link rel="stylesheet" type="text/css" href="js/DataTables-1.10.3/media/css/jquery.dataTables.css">
 <!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="js/datatables/media/js/jquery.dataTables.js"></script>
-        
+<script type="text/javascript" charset="utf8" src="js/DataTables-1.10.3/media/js/jquery.dataTables.js"></script>        
+
 <!-- JS Principal -->
 <script src="js/main.js"></script>
 

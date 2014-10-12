@@ -4,22 +4,36 @@
  * and open the template in the editor.
  */
 
-$(document).ready(function(){
+$(document).ready(function () {
     $("#NovaVenda").hide(0.0000001);
-    
-    $("#BotaoNovo").click(function(){
+
+    $("#BotaoNovo").click(function () {
         $('#BotaoEfetuadas').removeClass("active");
         $('#BotaoNovo').addClass("active");
         $("#VendasEfetuadas").hide(0.0000001);
         $("#NovaVenda").fadeIn('slow');
     });
 
-    $("#BotaoEfetuadas").click(function(){
+    $("#BotaoEfetuadas").click(function () {
         $('#BotaoNovo').removeClass("active");
         $('#BotaoEfetuadas').addClass("active");
         $("#NovaVenda").hide(0.0000001);
         $("#VendasEfetuadas").fadeIn('slow');
     });
-    
-    $('#TableProdutos').dataTable();
+
+    $('#TableProdutos').dataTable({
+        info: false,
+        ordering: false,
+        "language": {
+            "lengthMenu":     "Mostrar _MENU_ produtos",
+            "infoEmpty":      "Não há produtos cadastrados.",
+            "search":         "Filtre um produto:",
+            "paginate": {
+                "first":      "Primeira",
+                "last":       "Ultima",
+                "next":       "Próxima",
+                "previous":   "Anterior"
+            }
+        }
+    });
 });

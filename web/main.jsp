@@ -4,6 +4,10 @@
     Author     : daniel
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Usuario"%>
+<%@page import="model.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -14,7 +18,6 @@
 
     <head>
         <title>ERP Jabuti</title>
-        <%@page import="model.Usuario"%>
         <%@include file="WEB-INF/jspf/head.jspf"%>
     </head>
 
@@ -28,7 +31,7 @@
         %>
 
         <div id="wrapper">
-            
+
             <%@include file="WEB-INF/jspf/navigation.jspf"%>
 
             <div id="page-wrapper">
@@ -110,74 +113,59 @@
                     </div>
                     <!-- /.row -->
                     <div class="row">
+
                         <div class="col-lg-6">
-                            <div class="table-responsive">
-                                <label>Produtos</label>
-                                <table class="table table-striped table-bordered table-hover dataTable" id="TableProdutos">
-                                    <thead>
-                                        <tr>
-                                            <th>#Premio</th>
-                                            <th>Jogador(id):</th>
-                                            <th>Ano</th>
-                                            <th>Valor</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>lalala</td>
-                                            <td><a href="#">lalala</a></td>
-                                            <td>lalala</td>
-                                            <td>lalala</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Produtos</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="display" id="TableProdutos">
+                                        <thead>
+                                            <tr>
+                                                <th>#Código</th>
+                                                <th>Nome</th>
+                                                <th>Qtde. disponível</th>
+                                                <th>Sel. quantidade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                List<Produto> produtos = (List<Produto>) request.getAttribute("listProdutos");
+                                                if (!produtos.isEmpty()) {
+                                                    for (Iterator iterator = produtos.iterator(); iterator.hasNext();) {
+                                                        Produto produto = (Produto) iterator.next();
+                                            %>
+                                            <tr class="gradeA">
+                                                <td><%=produto.getCodigo()%></td>
+                                                <td><%=produto.getNome()%></td>
+                                                <td></td>
+                                                <td>
+                                                    <input type="number" id="QtdeProd" min="0" max="100" value="1">
+                                                    <button type="button" class="btn btn-primary btn-xs">Add. Produto >></button>
+                                                </td>
+                                            </tr>
+                                            <%
+                                                    }
+                                                }
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Itens na Venda</h3>
+                                </div>
+                                <div class="panel-body">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /#wrapper -->
-
-            <!-- jQuery Version 1.11.0 -->
-            <script src="js/jquery-1.11.0.js"></script>
-
-            <!-- Bootstrap Core JavaScript -->
-            <script src="js/bootstrap.min.js"></script>
-
-            <!-- Metis Menu Plugin JavaScript -->
-            <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
-
-            <!-- Morris Charts JavaScript -->
-            <script src="js/plugins/morris/raphael.min.js"></script>
-            <script src="js/plugins/morris/morris.min.js"></script>
-            <script src="js/plugins/morris/morris-data.js"></script>
-
-            <!-- Custom Theme JavaScript -->
-            <script src="js/sb-admin-2.js"></script>
-
     </body>
 </html>

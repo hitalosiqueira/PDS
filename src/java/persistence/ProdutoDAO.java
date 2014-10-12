@@ -16,19 +16,18 @@ import java.util.List;
 import model.Lote;
 import model.Produto;
 
-
 /**
  *
  * @author daniel
  */
 public class ProdutoDAO {
     
-     private Connection c = ConnectionFactory.getConexao();
+    private Connection c = ConnectionFactory.getConexao();
 
     public List<Produto> buscaTodos() {
         String sql = "SELECT * FROM produto";
         List<Produto> lista = new ArrayList<>();
-
+        
         try {
             PreparedStatement p = c.prepareStatement(sql);
             ResultSet resultado = p.executeQuery();
@@ -75,5 +74,4 @@ public class ProdutoDAO {
 
         return lista;
     }
-    
 }
