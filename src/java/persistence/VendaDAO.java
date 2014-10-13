@@ -11,9 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Lote;
-import model.Produto;
-import model.Venda;
+import model.*;
 
 /**
  *
@@ -24,25 +22,31 @@ public class VendaDAO {
     private Connection c = ConnectionFactory.getConexao();
 
     public List<Venda> buscaTodos() {
-        String sql = "select pv.codigo_venda as CodigoVenda, c.codigo as CodigoCliente, c.nome as NomeCliente, l.codigo as Lote, p.nome as Produto, pv.quantidade as Quantidade from cliente c, produtos_venda pv, venda v, lote l, produto p where pv.codigo_venda = v.codigo and c.codigo = v.codigo_cliente and pv.codigo_lote = l.codigo and l.codigo_produto = p.codigo order by p.nome;";
         List<Venda> lista = new ArrayList<>();
-        List<String> listaProd = new ArrayList<>();
+        List<Lote> lotes = new ArrayList<>();
+        LoteDAO lotedao = new LoteDAO();
+        
+        String sql = "select c.codigo as CodigoCliente, c.nome as NomeCliente, c.ramo, c.esp_ramo, v.codigo as CodigoVenda from cliente c, venda v where c.codigo = v.codigo_cliente;";
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
-            ResultSet resultado = p.executeQuery();
+            ResultSet resultado = p.executeQuery();            
+            ResultSet resultado2 = null;
+            
             int i = 0;
             while (resultado.next()) {
                 Venda v = new Venda();
-                String prod = new String();
+                Cliente cli = new Cliente();
                 
-                v.setCodigo(resultado.getInt("CodigoVenda"));
-                v.setCodigo_cliente(resultado.getInt("CodigoCliente"));
-                v.setNome_cliente(resultado.getString("NomeCliente"));
-                v.setnLote(resultado.getInt("Lote"));
-                listaProd.add(resultado.getString("Produto"));
-                v.setProdutos(listaProd);
-                v.setQuantidade(resultado.getInt("Quantidade"));
+                v.setCodigo(resultado.getInt("codigovenda"));
+                
+                cli.setCodigo(resultado.getInt("codigocliente"));
+                cli.setNome(resultado.getString("nomecliente"));
+                cli.setRamo(resultado.getString("ramo"));
+                cli.setEsp_ramo(resultado.getString("esp_ramo"));                
+                v.setCliente(cli);
+                
+                v.setLotes(lotedao.buscaLotesVenda(v.getCodigo()));
                 lista.add(v);
 
             }
@@ -56,29 +60,30 @@ public class VendaDAO {
         return lista;
     }
 
-    public List<Venda> buscaId(int Id) {
-        String sql = "select pv.codigo_venda as CodigoVenda, c.codigo as CodigoCliente, c.nome as NomeCliente, l.codigo as Lote, p.nome as Produto, pv.quantidade as Quantidade from cliente c, produtos_venda pv, venda v, lote l, produto p where pv.codigo_venda = ? and pv.codigo_venda = v.codigo and c.codigo = v.codigo_cliente and pv.codigo_lote = l.codigo and l.codigo_produto = p.codigo order by p.nome; ";
-        List<Venda> lista = new ArrayList<>();
-        List<String> listaProd = new ArrayList<>();
+    public Venda buscaID(int codigo) {
+        Venda v = new Venda();
+        Cliente cli = new Cliente();
+        List<Lote> lotes = new ArrayList<>();
+        LoteDAO lotedao = new LoteDAO();
+        
+        String sql = "select c.codigo as CodigoCliente, c.nome as NomeCliente, c.ramo, c.esp_ramo, v.codigo as CodigoVenda from cliente c, venda v where c.codigo = v.codigo_cliente AND v.codigo =" + codigo;
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
-            p.setInt(1,Id);
-            ResultSet resultado = p.executeQuery();
-            while (resultado.next()) {
-                Venda v = new Venda();
-                Produto prod = new Produto();
-   
+            ResultSet resultado = p.executeQuery();            
+            ResultSet resultado2 = null;
+            
+            int i = 0;
+            while (resultado.next()) {                
+                v.setCodigo(resultado.getInt("codigovenda"));
                 
-                v.setCodigo(resultado.getInt("CodigoVenda"));
-                v.setCodigo_cliente(resultado.getInt("CodigoCliente"));
-                v.setNome_cliente(resultado.getString("NomeCliente"));
-                v.setnLote(resultado.getInt("Lote"));
-                listaProd.add(resultado.getString("Produto"));
-                v.setProdutos(listaProd);
-                v.setQuantidade(resultado.getInt("Quantidade"));
-                lista.add(v);
-
+                cli.setCodigo(resultado.getInt("codigocliente"));
+                cli.setNome(resultado.getString("nomecliente"));
+                cli.setRamo(resultado.getString("ramo"));
+                cli.setEsp_ramo(resultado.getString("esp_ramo"));                
+                v.setCliente(cli);
+                
+                v.setLotes(lotedao.buscaLotesVenda(v.getCodigo()));
             }
             p.close();
             System.out.println("busca realizada com sucesso");
@@ -87,6 +92,6 @@ public class VendaDAO {
             ex.printStackTrace();
         }
 
-        return lista;
+        return v;
     }
 }

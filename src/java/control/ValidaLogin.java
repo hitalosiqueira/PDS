@@ -69,9 +69,9 @@ public class ValidaLogin extends HttpServlet {
              
              if(usuario.isUsuarioValido(objUsuario,1)){
                  session.setAttribute("Usuario",objUsuario);
-                 RequestDispatcher rd = request.getRequestDispatcher("/ServletProduto");
+                 request.setAttribute("tipo", "carrega");
+                 RequestDispatcher rd = request.getRequestDispatcher("/ServletMain");
                  rd.forward(request, response);
-                 //response.sendRedirect("/ServletProduto");
        
              }else{
                  objUsuario.setAutorizado(false);

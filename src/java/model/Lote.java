@@ -14,11 +14,12 @@ import java.sql.Date;
 public class Lote {
 
     private int codigo;
-    private int codigo_produto;
+    private Produto produto;
     private Date dt_fabricacao;
     private Date dt_validade;
     private int qtde_inicial;
     private int qtde_atual;
+    private int qtde_pedido;
 
     public int getCodigo() {
         return codigo;
@@ -28,12 +29,12 @@ public class Lote {
         this.codigo = codigo;
     }
 
-    public int getCodigo_produto() {
-        return codigo_produto;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setCodigo_produto(int codigo_produto) {
-        this.codigo_produto = codigo_produto;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public Date getDt_fabricacao() {
@@ -68,4 +69,11 @@ public class Lote {
         this.qtde_atual = qtde_atual;
     }
 
+    public int getQtde_pedido() {
+        return qtde_pedido;
+    }
+
+    public void setQtde_pedido(int qtde_pedido) {
+        this.qtde_pedido = qtde_pedido;
+    }
 }

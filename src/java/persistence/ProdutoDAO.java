@@ -6,14 +6,11 @@
 package persistence;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import model.Lote;
 import model.Produto;
 
 /**
@@ -26,10 +23,10 @@ public class ProdutoDAO {
 
     public List<Produto> buscaTodos() {
         String sql = "select l.codigo_produto, p.nome, sum(qtde_atual) as qtdetotal\n" +
-"	from lote l, produto p\n" +
-"	where l.codigo_produto = p.codigo and l.dt_validade > current_date\n" +
-"	group by l.codigo_produto, p.nome\n" +
-"	order by l.codigo_produto";
+                    "	from lote l, produto p\n" +
+                    "	where l.codigo_produto = p.codigo and l.dt_validade > current_date\n" +
+                    "	group by l.codigo_produto, p.nome\n" +
+                    "	order by l.codigo_produto";
         List<Produto> lista = new ArrayList<>();
         
         try {
@@ -54,22 +51,20 @@ public class ProdutoDAO {
         return lista;
     }
     
-    public List<Produto> buscaNome(String nome) {
-        String sql = "SELECT * FROM produto where lower(nome) like ?";
-        List<Produto> lista = new ArrayList<>();
+    public Produto buscaCodigo(int codigo) {
+        String sql = "SELECT * FROM produto where codigo ="+codigo;
+        Produto pro = new Produto();
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
-            p.setString(1,"%" + nome.toLowerCase() + "%");
             ResultSet resultado = p.executeQuery();
-
+            Produto prod = new Produto();
+            
             while (resultado.next()) {
-                Produto prod = new Produto();
-                
                 prod.setCodigo(resultado.getInt("codigo"));
                 prod.setNome(resultado.getString("nome"));
-                lista.add(prod);
             }
+            
             p.close();
             System.out.println("busca realizada com sucesso");
         } catch (SQLException ex) {
@@ -77,6 +72,6 @@ public class ProdutoDAO {
             ex.printStackTrace();
         }
 
-        return lista;
+        return pro;
     }
 }

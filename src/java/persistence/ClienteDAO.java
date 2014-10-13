@@ -48,5 +48,30 @@ public class ClienteDAO {
 
         return lista;
     }
+    
+    public Cliente buscaCodigo(int codigo) {
+        String sql = "SELECT * FROM cliente WHERE codigo = "+ codigo;
+        Cliente cli = new Cliente();
+        
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet resultado = p.executeQuery();
+
+            while (resultado.next()) {
+                cli.setCodigo(resultado.getInt("codigo"));
+                cli.setNome(resultado.getString("nome"));
+                cli.setRamo(resultado.getString("ramo"));
+                cli.setEsp_ramo(resultado.getString("esp_ramo"));
+            }
+            
+            p.close();
+            System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
+        }
+
+        return cli;
+    }
 
 }

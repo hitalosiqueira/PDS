@@ -9,12 +9,8 @@
         <servlet-class>control.ServletVenda</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletLote</servlet-name>
-        <servlet-class>control.ServletLote</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletProduto</servlet-name>
-        <servlet-class>control.ServletProduto</servlet-class>
+        <servlet-name>ServletMain</servlet-name>
+        <servlet-class>control.ServletMain</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ValidaLogin</servlet-name>
@@ -25,12 +21,8 @@
         <url-pattern>/ServletVenda</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletLote</servlet-name>
-        <url-pattern>/ServletLote</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletProduto</servlet-name>
-        <url-pattern>/ServletProduto</url-pattern>
+        <servlet-name>ServletMain</servlet-name>
+        <url-pattern>/ServletMain</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

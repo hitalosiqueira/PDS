@@ -4,24 +4,19 @@
     Author     : daniel
 --%>
 
-<%@page import="model.Cliente"%>
+<%@page import="model.*"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="model.Usuario"%>
-<%@page import="model.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-
     <head>
         <title>ERP Jabuti</title>
         <%@include file="WEB-INF/jspf/head.jspf"%>
     </head>
-
     <body>
         <%//recupera a sessao
             HttpSession s = request.getSession(false);
@@ -30,11 +25,8 @@
                 login = (Usuario) s.getAttribute("Usuario");
             }
         %>
-
         <div id="wrapper">
-
             <%@include file="WEB-INF/jspf/navigation.jspf"%>
-
             <div id="page-wrapper">
                 <div id="VendasEfetuadas">
                     <div class="row">
@@ -47,22 +39,33 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-hover">
+                                <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Page</th>
-                                            <th>Visits</th>
-                                            <th>% New Visits</th>
-                                            <th>Revenue</th>
+                                            <th>#Código</th>
+                                            <th>Cliente</th>
+                                            <th>Ramo</th>
+                                            <th>Espcialização</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <%
+                                            List<Venda> vendas = (List<Venda>) request.getAttribute("listVendas");
+                                            if (!vendas.isEmpty()) {
+                                                for (Iterator iterator = vendas.iterator(); iterator.hasNext();) {
+                                                    Venda venda = (Venda) iterator.next();
+                                                    Cliente cli = venda.getCliente();
+                                        %>
                                         <tr>
-                                            <td>/index.html</td>
-                                            <td>1265</td>
-                                            <td>32.3%</td>
-                                            <td>$321.33</td>
+                                            <td><%=venda.getCodigo()%><a href="/ServletVenda?tipo=visualiza&cod=<%=venda.getCodigo()%>"class="btn btn-primary btn-xs pull-right">Visualizar venda</a></td>
+                                            <td><%=cli.getNome()%></td>
+                                            <td><%=cli.getRamo()%></td>
+                                            <td><%=cli.getEsp_ramo()%></td>
                                         </tr>
+                                        <%
+                                                }
+                                            }
+                                        %>
                                     </tbody>
                                 </table>
                             </div>
@@ -78,7 +81,6 @@
                     </div>
                     <!-- /.row -->
                     <div class="row">
-
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -140,7 +142,7 @@
                                     </table>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <div class="pull-left" style="margin-top: 7px;">Selecione o cliente:</div>
+                                            <div class="pull-left" style="margin-top: 7px;"><b>Selecione o cliente:</b></div>
                                             <select class="form-control" style="width: 200px;">
                                                 <%
                                                     List<Cliente> clientes = (List<Cliente>) request.getAttribute("listClientes");

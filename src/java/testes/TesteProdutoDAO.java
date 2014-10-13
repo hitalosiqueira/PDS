@@ -24,18 +24,18 @@ public class TesteProdutoDAO {
      * @param args the command line arguments
      */
         
-    public static void main(String[] args) throws DAOException, SQLException {
-
-        List<Produto> lista = new ArrayList<Produto>();
-        ProdutoDAO l = new ProdutoDAO();
-
-        lista = l.buscaNome("Dipirona");
-
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).getCodigo());
-            System.out.println(lista.get(i).getNome());
-            System.out.println();
-        }
-
-    }
+//    public static void main(String[] args) throws DAOException, SQLException {
+//
+//        List<Produto> lista = new ArrayList<Produto>();
+//        ProdutoDAO l = new ProdutoDAO();
+//
+//        lista = l.buscaNome("Dipirona");
+//
+//        for (int i = 0; i < lista.size(); i++) {
+//            System.out.println(lista.get(i).getCodigo());
+//            System.out.println(lista.get(i).getNome());
+//            System.out.println();
+//        }
+//
+//    }
 }
