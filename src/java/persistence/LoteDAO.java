@@ -52,6 +52,33 @@ public class LoteDAO {
         return lista;
     }
     
+    public List<Lote> buscaLotesProduto(int codigo) {
+        String sql = "SELECT * FROM lote WHERE dt_validade > current_date AND codigo_produto="+codigo+" ORDER BY dt_validade";
+        List<Lote> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet resultado = p.executeQuery();
+
+            while (resultado.next()) {
+                Lote l = new Lote();
+
+                l.setCodigo(resultado.getInt("codigo"));
+                l.setDt_fabricacao(resultado.getDate("dt_fabricacao"));
+                l.setDt_validade(resultado.getDate("dt_validade"));
+                l.setQtde_atual(resultado.getInt("qtde_atual"));
+                lista.add(l);
+            }
+            p.close();
+            System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
+        }
+
+        return lista;
+    }
+    
 //    public List<Lote> buscaCodProdutoValidade(int codigo, String dt_validade) {
 //    String sql = "SELECT * FROM lote where codigo = ? and dt_validade = ?";
 //    List<Lote> lista = new ArrayList<>();

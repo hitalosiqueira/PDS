@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +20,20 @@ import persistence.*;
  *
  * @author daniel
  */
+@WebServlet(name = "ServletMain", urlPatterns = {"/ServletMain"})
 public class ServletMain extends HttpServlet {
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String tipo= (String)request.getParameter("tipo");
+        
+        if (tipo.compareTo("carrega")==0) {
+            carregaMain(request, response);
+        }
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,7 +43,7 @@ public class ServletMain extends HttpServlet {
         if (tipo.compareTo("carrega")==0)
             carregaMain(request, response);
     }
-
+    
     private void carregaMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         ProdutoDAO produtodao = new ProdutoDAO();
         List<Produto> produtos = null;
@@ -46,7 +59,7 @@ public class ServletMain extends HttpServlet {
         List<Venda> vendas = null;
         vendas = vendadao.buscaTodos();
         request.setAttribute("listVendas", vendas);
-
+        
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("/main.jsp");
         rd.forward(request, response);

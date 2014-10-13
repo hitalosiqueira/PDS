@@ -25,11 +25,36 @@ $(document).ready(function () {
         var cod = $(this).parent().prev().prev().prev().html();
         var qtde = $(this).prev().val();
         var nome = $(this).parent().prev().prev().html();
+        var app;
         
+        var max = $(this).prev().attr("max");
+        $(this).prev().attr("max",max - qtde);
         
-
-        var app = "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+qtde+"</td><td>123</td><td>10/01/1991</td></tr>";
-        $('#TabelaVenda').children().next().append(app);
+        $.ajax({
+            url:  "ServletLote",
+            type: 'post',
+            data: {'codigo':cod, 'quantidade':qtde, 'tipo':'add'},
+            success: function(data, textStatus, jqXHR) {
+                data.trim();
+                var arr = data.split('#');
+                if(arr.length == 5){
+                    app = "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+arr[4]+"</td><td>"+arr[1]+"</td><td>"+arr[2]+"</td><td>"+arr[3]+"</td></tr>";
+                }else{
+                    i = 1;
+                    while(i < arr.length){
+                        if((i+4) >= arr.length )
+                            app = app + "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+qtde+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td></tr>";
+                        else
+                            app = app + "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+arr[i+3]+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td></tr>";
+                        qtde = qtde-arr[i+3];
+                        i = i+4;
+                    }
+                }
+                $('#TabelaVenda').children().next().append(app);
+            }
+        });
+        
+        $(this).parent().prev().html(max-qtde);       
     });
 
     $('#TableProdutos').dataTable({

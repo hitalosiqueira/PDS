@@ -35,14 +35,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/ServletProduto">ERP Jabuti</a>
+                    <a class="navbar-brand" href="ServletMain?tipo=carrega">ERP Jabuti</a>
                 </div>
                 <!-- /.navbar-header -->
 
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
                         <form method="post" action="ValidaLogin" id="formlogout" style="margin-top: 15px;">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:{}" onclick="document.getElementById('formlogout').submit(); return false;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:{}" onclick="document.getElementById('formlogout').submit();
+                                    return false;">
                                 <i class="fa fa-user fa-fw"></i><b><%= login.getLogin()%></b><i class="fa fa-sign-out fa-fw"></i>
                             </a>
                             <input type="hidden" name="tipo" value="logout">
@@ -51,19 +52,105 @@
                     </li>
                 </ul>
             </nav>
-            <div id="page-wrapper">
+            <div id="page-wrapper" style="margin-left: 0">
                 <div id="VendasEfetuadas">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Vendas Efetuadas</h1>
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6" style="margin-top: 10px;">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row" style="text-align: center;">
+                                        <h1 class="page-header">Relatório de Venda</h1>
+                                    </div>
+                                    <!-- /.row -->
+                                    <%
+                                        Venda venda = (Venda) request.getAttribute("venda");
+                                        Cliente cliente = venda.getCliente();
+                                        List<Lote> lotes = venda.getLotes();
+                                        if (venda != null) {
+                                    %>
+                                    <div class="row" style='margin: 10px 10px 10px 10px;'>
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Cód. venda:</label>
+                                                <div class="col-sm-2">
+                                                    <p class="form-control-static"><%=venda.getCodigo()%></p>
+                                                </div>
+                                                <label class="col-sm-2 control-label">Cód. cliente:</label>
+                                                <div class="col-sm-2">
+                                                    <p class="form-control-static"><%=cliente.getCodigo()%></p>
+                                                </div>
+                                                <label class="col-sm-2 control-label">Cliente:</label>
+                                                <div class="col-sm-2">
+                                                    <p class="form-control-static"><%=cliente.getNome()%></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-2"></div>
+                                                <div class="col-sm-2"></div>
+                                                <label class="col-sm-2 control-label">Ramo:</label>
+                                                <div class="col-sm-2">
+                                                    <p class="form-control-static"><%=cliente.getRamo()%></p>
+                                                </div>
+                                                <label class="col-sm-2 control-label">Especialização:</label>
+                                                <div class="col-sm-2">
+                                                    <p class="form-control-static"><%=cliente.getEsp_ramo()%></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Lotes no pedido:</label>
+                                                <div class="col-sm-9">
+                                                    <div class="well" style="background-color: #fcfcfc;">
+                                                        <% for (Iterator iterator = lotes.iterator(); iterator.hasNext();) {
+                                                                Lote lote = (Lote) iterator.next();
+                                                                Produto pro = lote.getProduto();
+                                                        %>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Cod. Lote:</label>
+                                                            <div class="col-sm-3">
+                                                                <p class="form-control-static"><%=lote.getCodigo()%></p>
+                                                            </div>
+                                                            <label class="col-sm-3 control-label">Cod. Produto:</label>
+                                                            <div class="col-sm-3">
+                                                                <p class="form-control-static"><%=pro.getCodigo()%></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Nome:</label>
+                                                            <div class="col-sm-3">
+                                                                <p class="form-control-static"><%=pro.getNome()%></p>
+                                                            </div>
+                                                            <label class="col-sm-3 control-label">Fabricação:</label>
+                                                            <div class="col-sm-3">
+                                                                <p class="form-control-static"><%=lote.getDt_fabricacao()%></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Validade:</label>
+                                                            <div class="col-sm-3">
+                                                                <p class="form-control-static"><%=lote.getDt_validade()%></p>
+                                                            </div>
+                                                            <label class="col-sm-3 control-label">Qtde. pedido:</label>
+                                                            <div class="col-sm-3">
+                                                                <p class="form-control-static"><%=lote.getQtde_pedido()%></p>
+                                                            </div>
+                                                        </div>
+                                                        <%
+                                                            if (iterator.hasNext()) {
+                                                        %>
+                                                        <hr>
+                                                        <%  }
+                                                            } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <% }%>
+                                    <a href="ServletMain?tipo=carrega" class="btn btn-primary pull-right" style="margin-top: -20px;">Voltar</a>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            lalalal
-                        </div>
+                        <div class="col-lg-3"></div>
                     </div>
                 </div>
             </div>

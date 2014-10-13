@@ -5,8 +5,8 @@
         <servlet-class>control.ValidaLogin</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletVenda</servlet-name>
-        <servlet-class>control.ServletVenda</servlet-class>
+        <servlet-name>ServletVendas</servlet-name>
+        <servlet-class>control.ServletVendas</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServletMain</servlet-name>
@@ -17,8 +17,8 @@
         <url-pattern>/ValidaLogin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletVenda</servlet-name>
-        <url-pattern>/ServletVenda</url-pattern>
+        <servlet-name>ServletVendas</servlet-name>
+        <url-pattern>/ServletVendas</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletMain</servlet-name>

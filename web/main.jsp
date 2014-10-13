@@ -57,7 +57,7 @@
                                                     Cliente cli = venda.getCliente();
                                         %>
                                         <tr>
-                                            <td><%=venda.getCodigo()%><a href="/ServletVenda?tipo=visualiza&cod=<%=venda.getCodigo()%>"class="btn btn-primary btn-xs pull-right">Visualizar venda</a></td>
+                                            <td><%=venda.getCodigo()%><a href="ServletVendas?tipo=visualiza&cod=<%=venda.getCodigo()%>" class="btn btn-primary btn-xs pull-right">Visualizar venda</a></td>
                                             <td><%=cli.getNome()%></td>
                                             <td><%=cli.getRamo()%></td>
                                             <td><%=cli.getEsp_ramo()%></td>
@@ -134,6 +134,7 @@
                                                 <th>Nome</th>
                                                 <th>Qtde.</th>
                                                 <th>Lote</th>
+                                                <th>Fabricação</th>
                                                 <th>Validade</th>
                                             </tr>
                                         </thead>
