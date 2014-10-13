@@ -38,6 +38,11 @@ public class ServletProduto extends HttpServlet {
         List<Cliente> clientes = null;
         clientes = clientedao.buscaTodos();
         request.setAttribute("listClientes", clientes);
+        
+        VendaDAO vendadao = new VendaDAO();
+        List<Venda> vendas = null;
+        vendas = vendadao.buscaTodos();
+        request.setAttribute("listVendas", vendas);
 
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("/main.jsp");

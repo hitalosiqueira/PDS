@@ -104,9 +104,9 @@
                                             <tr class="gradeA">
                                                 <td><%=produto.getCodigo()%></td>
                                                 <td><%=produto.getNome()%></td>
-                                                <td></td>
+                                                <td><%=produto.getQuantidade()%></td>
                                                 <td>
-                                                    <input type="number" id="QtdeProd" min="0" max="100" value="1" >
+                                                    <input type="number" id="QtdeProd" min="0" max="<%=produto.getQuantidade()%>" value="1" >
                                                     <button type="button" class="btn btn-primary btn-xs pull-right BotaoAdd">Add. Produto >></button>
                                                 </td>
                                             </tr>

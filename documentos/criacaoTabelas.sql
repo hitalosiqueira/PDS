@@ -30,8 +30,8 @@ CREATE TABLE Venda(
 CREATE TABLE Lote(
 	codigo		INT PRIMARY KEY,
 	codigo_produto	INT,
-	dt_fabricacao	VARCHAR(10),
-	dt_validade	VARCHAR(10),
+	dt_fabricacao	DATE,
+	dt_validade	DATE,
 	qtde_inicial	INT,
 	qtde_atual	INT,
 	FOREIGN KEY	(codigo_produto) REFERENCES Produto(codigo) ON DELETE CASCADE ON UPDATE CASCADE
