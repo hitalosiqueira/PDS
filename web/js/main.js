@@ -56,6 +56,30 @@ $(document).ready(function () {
         
         $(this).parent().prev().html(max-qtde);       
     });
+    
+    $("#FinalizaVenda").click(function () {
+        var cli = $('#SelCliente').val();
+        var lotes = "";
+        var quantidade = "";
+        
+        var apontador = $('#TabelaVenda').children().next().children();
+        while(apontador.children().length > 0){
+            lotes = lotes + apontador.children().next().next().next().html();
+            apontador = apontador.next();
+            if (apontador.children().length > 0)
+                lotes = lotes+"#";
+        }
+        
+        var apontador = $('#TabelaVenda').children().next().children();
+        while(apontador.children().length > 0){
+            quantidade = quantidade + apontador.children().next().next().html();
+            apontador = apontador.next();
+            if (apontador.children().length > 0)
+                quantidade = quantidade+"#";
+        }
+        
+        $.post( "ServletVendas", { tipo: "salva", cliente: cli, lotes: lotes, quantidade: quantidade } );          
+    });
 
     $('#TableProdutos').dataTable({
         info: false,

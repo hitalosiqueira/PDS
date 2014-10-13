@@ -66,8 +66,6 @@ public class ServletLote extends HttpServlet {
             }
         }
         
-        System.out.println(resultado);
-        
         PrintWriter writer = response.getWriter();
         writer.print(resultado);
         writer.close();

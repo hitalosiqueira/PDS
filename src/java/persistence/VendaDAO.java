@@ -94,4 +94,35 @@ public class VendaDAO {
 
         return v;
     }
+    
+    public void salva(Venda venda) {
+        Cliente cli = venda.getCliente();
+        List<Lote> lotes = venda.getLotes();
+        
+        String sql = "select c.codigo as CodigoCliente, c.nome as NomeCliente, c.ramo, c.esp_ramo, v.codigo as CodigoVenda from cliente c, venda v where c.codigo = v.codigo_cliente AND v.codigo =" + codigo;
+
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet resultado = p.executeQuery();            
+            ResultSet resultado2 = null;
+            
+            int i = 0;
+            while (resultado.next()) {                
+                v.setCodigo(resultado.getInt("codigovenda"));
+                
+                cli.setCodigo(resultado.getInt("codigocliente"));
+                cli.setNome(resultado.getString("nomecliente"));
+                cli.setRamo(resultado.getString("ramo"));
+                cli.setEsp_ramo(resultado.getString("esp_ramo"));                
+                v.setCliente(cli);
+                
+                v.setLotes(lotedao.buscaLotesVenda(v.getCodigo()));
+            }
+            p.close();
+            System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
+        }
+    }
 }

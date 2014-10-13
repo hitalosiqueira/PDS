@@ -143,8 +143,9 @@
                                     </table>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <div class="pull-left" style="margin-top: 7px;"><b>Selecione o cliente:</b></div>
-                                            <select class="form-control" style="width: 200px;">
+                                            <div class="pull-left" style="margin-top: 7px;"><b>Cliente:</b></div>
+                                            <select class="form-control" style="width: 200px;" id="SelCliente">
+                                                <option value="-1">Selecione um cliente</option>
                                                 <%
                                                     List<Cliente> clientes = (List<Cliente>) request.getAttribute("listClientes");
                                                     if (!clientes.isEmpty()) {
@@ -159,7 +160,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <button type="button" class="btn btn-success pull-right">Finalizar Venda</button>
+                                            <button type="button" class="btn btn-success pull-right" id="FinalizaVenda">Finalizar Venda</button>
                                         </div>
                                     </div>
                                 </div>
