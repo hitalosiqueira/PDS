@@ -108,7 +108,12 @@ public class VendaDAO {
             Statement ps = c.createStatement();
             ResultSet resultado = p.executeQuery();
             resultado.next();
-            codigo_venda = Integer.parseInt(resultado.getString("max"))+1;
+            
+            String cd = resultado.getString("max");
+            if(cd == null)
+                codigo_venda = 1;
+            else 
+                codigo_venda = Integer.parseInt(cd)+1;
             
             sql = "INSERT INTO venda VALUES ("+codigo_venda+","+cli.getCodigo()+")";
             ps.executeUpdate(sql);
