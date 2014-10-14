@@ -24,7 +24,6 @@ public class LoteDAO {
     public List<Lote> buscaLotesVenda(int codigo) {
         String sql = "SELECT l.codigo, p.codigo as codigo_produto, p.nome, pv.quantidade, l.dt_fabricacao, l.dt_validade FROM produtos_venda pv, lote l, produto p WHERE l.codigo = pv.codigo_lote AND l.codigo_produto = p.codigo AND pv.codigo_venda ="+codigo;
         List<Lote> lista = new ArrayList<>();
-        Produto pro = new Produto();
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
@@ -32,6 +31,7 @@ public class LoteDAO {
 
             while (resultado.next()) {
                 Lote l = new Lote();
+                Produto pro = new Produto();
 
                 l.setCodigo(resultado.getInt("codigo"));
                 pro.setCodigo(resultado.getInt("codigo_produto"));

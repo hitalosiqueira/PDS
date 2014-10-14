@@ -6,6 +6,8 @@
 package control;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,7 +66,7 @@ public class ServletVendas extends HttpServlet {
         
         Venda venda = new Venda();
         Cliente cliente = new Cliente();
-        List<Lote> lotes = null;
+        List<Lote> lotes = new ArrayList<Lote>();
         VendaDAO vendadao = new VendaDAO();
         
         cliente.setCodigo(cli);
@@ -77,17 +79,16 @@ public class ServletVendas extends HttpServlet {
             Lote lote = new Lote();
             lote.setCodigo(Integer.parseInt(plotes[i]));
             lote.setQtde_pedido(Integer.parseInt(pqtdes[i]));
-            
             lotes.add(lote);
         }        
         venda.setLotes(lotes);
         
-        vendadao.salva(venda);
+        int cod_venda = vendadao.salva(venda);
         
-//        request.setAttribute("venda", venda);
-//        
-//        RequestDispatcher rd = null;
-//        rd = request.getRequestDispatcher("/viewVenda.jsp");
-//        rd.forward(request, response);
+        RequestDispatcher rd = null;
+        
+        String red = "ServletVendas?tipo=visualiza&cod="+cod_venda;
+        rd = request.getRequestDispatcher(red);
+        rd.forward(request, response);
     }
 }

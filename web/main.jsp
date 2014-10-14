@@ -160,7 +160,8 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4">
-                                            <button type="button" class="btn btn-success pull-right" id="FinalizaVenda">Finalizar Venda</button>
+                                            <input type="hidden" id="flagProduto" value="0">
+                                            <button type="button" disabled class="btn btn-success pull-right" id="FinalizaVenda">Finalizar Venda</button>
                                         </div>
                                     </div>
                                 </div>

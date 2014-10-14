@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import model.*;
 
@@ -95,34 +97,46 @@ public class VendaDAO {
         return v;
     }
     
-    public void salva(Venda venda) {
+    public int salva(Venda venda) {
         Cliente cli = venda.getCliente();
         List<Lote> lotes = venda.getLotes();
+        int codigo_venda = 0;
         
-        String sql = "select c.codigo as CodigoCliente, c.nome as NomeCliente, c.ramo, c.esp_ramo, v.codigo as CodigoVenda from cliente c, venda v where c.codigo = v.codigo_cliente AND v.codigo =" + codigo;
-
-        try {
+        try {            
+            String sql = "SELECT max(codigo) FROM venda"; 
             PreparedStatement p = c.prepareStatement(sql);
-            ResultSet resultado = p.executeQuery();            
-            ResultSet resultado2 = null;
+            Statement ps = c.createStatement();
+            ResultSet resultado = p.executeQuery();
+            resultado.next();
+            codigo_venda = Integer.parseInt(resultado.getString("max"))+1;
             
-            int i = 0;
-            while (resultado.next()) {                
-                v.setCodigo(resultado.getInt("codigovenda"));
-                
-                cli.setCodigo(resultado.getInt("codigocliente"));
-                cli.setNome(resultado.getString("nomecliente"));
-                cli.setRamo(resultado.getString("ramo"));
-                cli.setEsp_ramo(resultado.getString("esp_ramo"));                
-                v.setCliente(cli);
-                
-                v.setLotes(lotedao.buscaLotesVenda(v.getCodigo()));
+            sql = "INSERT INTO venda VALUES ("+codigo_venda+","+cli.getCodigo()+")";
+            ps.executeUpdate(sql);
+            
+            sql = "INSERT INTO produtos_venda VALUES ";
+            for (Iterator iterator = lotes.iterator(); iterator.hasNext();) {
+                Lote lote = (Lote)iterator.next();
+                sql = sql + "("+codigo_venda+","+lote.getCodigo()+","+lote.getQtde_pedido()+")";
+                if (iterator.hasNext())
+                    sql = sql + ",";
             }
+            ps.executeUpdate(sql);
+            
+            for (Iterator iterator = lotes.iterator(); iterator.hasNext();) {
+                Lote lote = (Lote)iterator.next();
+                sql = "UPDATE lote SET qtde_atual = qtde_atual-"+lote.getQtde_pedido()+" WHERE codigo = "+lote.getCodigo();
+                ps.executeUpdate(sql);
+            }     
+ 
             p.close();
-            System.out.println("busca realizada com sucesso");
+            ps.close();
+            
+            System.out.println("venda realizada com sucesso");
+
         } catch (SQLException ex) {
-            System.out.println("falha na busca");
-            ex.printStackTrace();
+            
+            System.out.println("falha na venda");
         }
+        return codigo_venda;
     }
 }
