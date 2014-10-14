@@ -45,7 +45,7 @@ $(document).ready(function () {
                         if((i+4) >= arr.length )
                             app = app + "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+qtde+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td></tr>";
                         else
-                            app = app + "<tr class='gradeA'>"+cod+"</td><td>"+nome+"</td><td>"+arr[i+3]+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td></tr>";
+                            app = app + "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+arr[i+3]+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td></tr>";
                         qtde = qtde-arr[i+3];
                         i = i+4;
                     }
@@ -58,14 +58,18 @@ $(document).ready(function () {
         
         $('#flagProduto').val("1");
         console.log($('#SelCliente').val());
-        if($('#SelCliente').val() != "-1")
+        if($('#SelCliente').val() != "-1"){
+            $('#AlertVenda').fadeOut();
             $('#FinalizaVenda').removeAttr('disabled');
+        }
         
     });
     
     $("#SelCliente").change(function (){
-        if( ($('#flagProduto').val() == 1) && ($("#SelCliente").val() != -1) )
+        if( ($('#flagProduto').val() == 1) && ($("#SelCliente").val() != -1) ){
+            $('#AlertVenda').fadeOut();
             $('#FinalizaVenda').removeAttr('disabled');
+        }
     });
     
 //    $(".BotaoDel").click(function () {

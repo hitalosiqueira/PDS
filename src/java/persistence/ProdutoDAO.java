@@ -52,7 +52,7 @@ public class ProdutoDAO {
     }
     
     public Produto buscaCodigo(int codigo) {
-        String sql = "SELECT * FROM produto where codigo ="+codigo;
+        String sql = "SELECT * FROM produto WHERE codigo ="+codigo;
         Produto pro = new Produto();
 
         try {

@@ -166,10 +166,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="alert alert-warning" role="alert" id="AlertVenda">
+                                <h4>É necessário selecionar o cliente e ao menos um produto para realizar uma venda. =)</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- /#wrapper -->
             </div>
-            <!-- /#wrapper -->
+        </div>
     </body>
 </html>

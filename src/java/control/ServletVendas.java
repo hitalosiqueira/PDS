@@ -88,7 +88,6 @@ public class ServletVendas extends HttpServlet {
         RequestDispatcher rd = null;
         
         String red = "ServletVendas?tipo=visualiza&cod="+cod_venda;
-        rd = request.getRequestDispatcher(red);
-        rd.forward(request, response);
+        response.sendRedirect(red);
     }
 }

@@ -53,7 +53,7 @@ public class LoteDAO {
     }
     
     public List<Lote> buscaLotesProduto(int codigo) {
-        String sql = "SELECT * FROM lote WHERE dt_validade > current_date AND codigo_produto="+codigo+" ORDER BY dt_validade";
+        String sql = "SELECT * FROM lote WHERE dt_validade > current_date AND codigo_produto="+codigo+" AND qtde_atual > 0 ORDER BY dt_validade";
         List<Lote> lista = new ArrayList<>();
 
         try {
