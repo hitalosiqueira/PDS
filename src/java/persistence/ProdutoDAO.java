@@ -22,10 +22,10 @@ public class ProdutoDAO {
     private Connection c = ConnectionFactory.getConexao();
 
     public List<Produto> buscaTodos() {
-        String sql = "select l.codigo_produto, p.nome, sum(qtde_atual) as qtdetotal\n" +
+        String sql = "select l.codigo_produto, p.nome, sum(qtde_atual) as qtdetotal, p.preco_unit as preco\n" +
                     "	from lote l, produto p\n" +
                     "	where l.codigo_produto = p.codigo and l.dt_validade > current_date\n" +
-                    "	group by l.codigo_produto, p.nome\n" +
+                    "	group by l.codigo_produto, p.nome, p.preco_unit\n" +
                     "	order by l.codigo_produto";
         List<Produto> lista = new ArrayList<>();
         
@@ -39,6 +39,7 @@ public class ProdutoDAO {
                 prod.setCodigo(resultado.getInt("codigo_produto"));
                 prod.setNome(resultado.getString("nome"));
                 prod.setQuantidade(Integer.parseInt(resultado.getString("qtdetotal")));
+                prod.setPreco_unit(resultado.getDouble("preco"));
                 lista.add(prod);
             }
             p.close();
@@ -63,6 +64,7 @@ public class ProdutoDAO {
             while (resultado.next()) {
                 prod.setCodigo(resultado.getInt("codigo"));
                 prod.setNome(resultado.getString("nome"));
+                prod.setPreco_unit(resultado.getDouble("preco_unit"));
             }
             
             p.close();

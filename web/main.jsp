@@ -9,10 +9,6 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <title>ERP Jabuti</title>
         <%@include file="WEB-INF/jspf/head.jspf"%>
@@ -46,6 +42,7 @@
                                             <th>Cliente</th>
                                             <th>Ramo</th>
                                             <th>Espcialização</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,6 +58,7 @@
                                             <td><%=cli.getNome()%></td>
                                             <td><%=cli.getRamo()%></td>
                                             <td><%=cli.getEsp_ramo()%></td>
+                                            <td>R$ <%=venda.getPreco_total()%></td>
                                         </tr>
                                         <%
                                                 }
@@ -79,6 +77,33 @@
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-lg-6" style="margin-bottom: 20px;">
+                                    <div class="pull-left" style="margin-top: 7px;"><b>Cliente:</b></div>
+                                        <select class="form-control" style="width: 200px;" id="SelCliente">
+                                            <option value="-1">Selecione um cliente</option>
+                                            <%
+                                                List<Cliente> clientes = (List<Cliente>) request.getAttribute("listClientes");
+                                                if (!clientes.isEmpty()) {
+                                                    for (Iterator iterator = clientes.iterator(); iterator.hasNext();) {
+                                                        Cliente cli = (Cliente) iterator.next();
+                                            %>
+                                            <option value="<%=cli.getCodigo()%>"><%=cli.getNome()%></option>
+                                            <%
+                                                    }
+                                                }
+                                            %>
+                                        </select>
+                                </div>
+                                <div class="col-lg-6 alert alert-warning" role="alert" id="AlertVenda">
+                                    <h4>É necessário selecionar o cliente e ao menos um produto para realizar uma venda. =)</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
                     <!-- /.row -->
                     <div class="row">
                         <div class="col-lg-6">
@@ -92,6 +117,7 @@
                                             <tr>
                                                 <th>#Código</th>
                                                 <th>Nome</th>
+                                                <th>Valor</th>
                                                 <th>Qtde. disponível</th>
                                                 <th>Sel. quantidade</th>
                                             </tr>
@@ -106,10 +132,11 @@
                                             <tr class="gradeA">
                                                 <td><%=produto.getCodigo()%></td>
                                                 <td><%=produto.getNome()%></td>
+                                                <td>R$ <%=produto.getPreco_unit()%></td>
                                                 <td><%=produto.getQuantidade()%></td>
                                                 <td>
-                                                    <input type="number" id="QtdeProd" min="0" max="<%=produto.getQuantidade()%>" value="1" >
-                                                    <button type="button" class="btn btn-primary btn-xs pull-right BotaoAdd">Add. Produto >></button>
+                                                    <input type="number" id="QtdeProd" min="0" max="<%=produto.getQuantidade()%>" value="1" style="width: 50px;">
+                                                    <button type="button" class="btn btn-primary btn-xs pull-right BotaoAdd">Add. >></button>
                                                 </td>
                                             </tr>
                                             <%
@@ -136,38 +163,21 @@
                                                 <th>Lote</th>
                                                 <th>Fabricação</th>
                                                 <th>Validade</th>
+                                                <th>Valor</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         </tbody>
                                     </table>
                                     <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="pull-left" style="margin-top: 7px;"><b>Cliente:</b></div>
-                                            <select class="form-control" style="width: 200px;" id="SelCliente">
-                                                <option value="-1">Selecione um cliente</option>
-                                                <%
-                                                    List<Cliente> clientes = (List<Cliente>) request.getAttribute("listClientes");
-                                                    if (!clientes.isEmpty()) {
-                                                        for (Iterator iterator = clientes.iterator(); iterator.hasNext();) {
-                                                            Cliente cli = (Cliente) iterator.next();
-                                                %>
-                                                <option value="<%=cli.getCodigo()%>"><%=cli.getNome()%></option>
-                                                <%
-                                                        }
-                                                    }
-                                                %>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
+                                            <label>Valor total: <p class='btn btn-info'id="total">0</p></label>
+                                            <input type="hidden" id="flagTotal" value="0">
                                             <input type="hidden" id="flagProduto" value="0">
-                                            <button type="button" disabled class="btn btn-success pull-right" id="FinalizaVenda">Finalizar Venda</button>
+                                            <button class="btn btn-success pull-right" id="FinalizaVenda">Finalizar Venda</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="alert alert-warning" role="alert" id="AlertVenda">
-                                <h4>É necessário selecionar o cliente e ao menos um produto para realizar uma venda. =)</h4>
                             </div>
                         </div>
                     </div>

@@ -16,6 +16,7 @@ public class Venda {
     private int codigo;  
     private Cliente cliente;
     private List<Lote> lotes; 
+    private Double preco_total;
 
     public Cliente getCliente() {
         return cliente;
@@ -40,6 +41,12 @@ public class Venda {
     public void setLotes(List<Lote> lotes) {
         this.lotes = lotes;
     }
-   
-    
+
+    public Double getPreco_total() {
+        return preco_total;
+    }
+
+    public void setPreco_total(Double preco_total) {
+        this.preco_total = preco_total;
+    }
 }

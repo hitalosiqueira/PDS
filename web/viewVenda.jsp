@@ -135,6 +135,16 @@
                                                                 <p class="form-control-static"><%=lote.getQtde_pedido()%></p>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Valor unitario:</label>
+                                                            <div class="col-sm-3">
+                                                                <p class="form-control-static">R$ <%=pro.getPreco_unit()%></p>
+                                                            </div>
+                                                            <label class="col-sm-3 control-label">Valor total:</label>
+                                                            <div class="col-sm-3">
+                                                                <p class="form-control-static">R$ <%= (pro.getPreco_unit()*lote.getQtde_pedido()) %></p>
+                                                            </div>
+                                                        </div>
                                                         <%
                                                             if (iterator.hasNext()) {
                                                         %>
@@ -143,6 +153,10 @@
                                                             } %>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Valor total do pedido:</label>
+                                                <div class="col-sm-9"><p class="form-control-static">R$ <%=venda.getPreco_total()%></p></div>
                                             </div>
                                     </div>
                                     <% }%>

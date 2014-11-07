@@ -22,7 +22,7 @@ public class LoteDAO {
     private Connection c = ConnectionFactory.getConexao();
 
     public List<Lote> buscaLotesVenda(int codigo) {
-        String sql = "SELECT l.codigo, p.codigo as codigo_produto, p.nome, pv.quantidade, l.dt_fabricacao, l.dt_validade FROM produtos_venda pv, lote l, produto p WHERE l.codigo = pv.codigo_lote AND l.codigo_produto = p.codigo AND pv.codigo_venda ="+codigo;
+        String sql = "SELECT l.codigo, p.codigo as codigo_produto, p.nome, p.preco_unit, pv.quantidade, l.dt_fabricacao, l.dt_validade FROM produtos_venda pv, lote l, produto p WHERE l.codigo = pv.codigo_lote AND l.codigo_produto = p.codigo AND pv.codigo_venda ="+codigo;
         List<Lote> lista = new ArrayList<>();
 
         try {
@@ -36,6 +36,7 @@ public class LoteDAO {
                 l.setCodigo(resultado.getInt("codigo"));
                 pro.setCodigo(resultado.getInt("codigo_produto"));
                 pro.setNome(resultado.getString("nome"));
+                pro.setPreco_unit(resultado.getDouble("preco_unit"));
                 l.setProduto(pro);
                 l.setDt_fabricacao(resultado.getDate("dt_fabricacao"));
                 l.setDt_validade(resultado.getDate("dt_validade"));

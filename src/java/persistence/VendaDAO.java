@@ -28,7 +28,7 @@ public class VendaDAO {
         List<Lote> lotes = new ArrayList<>();
         LoteDAO lotedao = new LoteDAO();
         
-        String sql = "select c.codigo as CodigoCliente, c.nome as NomeCliente, c.ramo, c.esp_ramo, v.codigo as CodigoVenda from cliente c, venda v where c.codigo = v.codigo_cliente;";
+        String sql = "select c.codigo as CodigoCliente, c.nome as NomeCliente, c.ramo, c.esp_ramo, v.codigo as CodigoVenda, v.preco_total as Valor from cliente c, venda v where c.codigo = v.codigo_cliente;";
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
@@ -50,6 +50,8 @@ public class VendaDAO {
                 
                 v.setLotes(lotedao.buscaLotesVenda(v.getCodigo()));
                 lista.add(v);
+                
+                v.setPreco_total(resultado.getDouble("valor"));
 
             }
             p.close();
@@ -68,7 +70,7 @@ public class VendaDAO {
         List<Lote> lotes = new ArrayList<>();
         LoteDAO lotedao = new LoteDAO();
         
-        String sql = "select c.codigo as CodigoCliente, c.nome as NomeCliente, c.ramo, c.esp_ramo, v.codigo as CodigoVenda from cliente c, venda v where c.codigo = v.codigo_cliente AND v.codigo =" + codigo;
+        String sql = "select c.codigo as CodigoCliente, c.nome as NomeCliente, c.ramo, c.esp_ramo, v.codigo as CodigoVenda, v.preco_total as Valor from cliente c, venda v where c.codigo = v.codigo_cliente AND v.codigo =" + codigo;
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
@@ -86,6 +88,8 @@ public class VendaDAO {
                 v.setCliente(cli);
                 
                 v.setLotes(lotedao.buscaLotesVenda(v.getCodigo()));
+                
+                v.setPreco_total(resultado.getDouble("valor"));
             }
             p.close();
             System.out.println("busca realizada com sucesso");
@@ -115,7 +119,7 @@ public class VendaDAO {
             else 
                 codigo_venda = Integer.parseInt(cd)+1;
             
-            sql = "INSERT INTO venda VALUES ("+codigo_venda+","+cli.getCodigo()+")";
+            sql = "INSERT INTO venda VALUES ("+codigo_venda+","+cli.getCodigo()+","+venda.getPreco_total()+")";
             ps.executeUpdate(sql);
             
             sql = "INSERT INTO produtos_venda VALUES ";

@@ -45,7 +45,8 @@ public class ServletVendas extends HttpServlet {
             int cliente = Integer.parseInt(request.getParameter("cliente"));
             String lotes = request.getParameter("lotes");
             String quantidade = request.getParameter("quantidade");
-            salvaVenda(request, response, cliente, lotes, quantidade);
+            Double total = Double.parseDouble(request.getParameter("total"));
+            salvaVenda(request, response, cliente, lotes, quantidade, total);
         }
     }
     
@@ -62,7 +63,7 @@ public class ServletVendas extends HttpServlet {
         rd.forward(request, response);
     }
     
-    private void salvaVenda(HttpServletRequest request, HttpServletResponse response, int cli, String lot, String quantidade) throws ServletException, IOException{
+    private void salvaVenda(HttpServletRequest request, HttpServletResponse response, int cli, String lot, String quantidade, Double total) throws ServletException, IOException{
         
         Venda venda = new Venda();
         Cliente cliente = new Cliente();
@@ -82,6 +83,7 @@ public class ServletVendas extends HttpServlet {
             lotes.add(lote);
         }        
         venda.setLotes(lotes);
+        venda.setPreco_total(total);
         
         int cod_venda = vendadao.salva(venda);
         

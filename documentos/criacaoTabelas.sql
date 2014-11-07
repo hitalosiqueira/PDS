@@ -2,16 +2,17 @@
 
 -- Arquivo: criacaoTabelas.sql
 
---DROP TABLE Produtos_Venda;
---DROP TABLE Lote;
---DROP TABLE Venda;
---DROP TABLE Cliente;
---DROP TABLE Produto;
---DROP TABLE Usuario;
+-- DROP TABLE Produtos_Venda;
+-- DROP TABLE Lote;
+-- DROP TABLE Venda;
+-- DROP TABLE Cliente;
+-- DROP TABLE Produto;
+-- DROP TABLE Usuario;
 
 CREATE TABLE Produto(
 	codigo		INT PRIMARY KEY,
-	nome		VARCHAR(50)
+	nome		VARCHAR(50),
+	preco_unit	DOUBLE PRECISION
 );
 
 CREATE TABLE Cliente(
@@ -24,6 +25,7 @@ CREATE TABLE Cliente(
 CREATE TABLE Venda(
 	codigo		INT PRIMARY KEY,
 	codigo_cliente	INT,
+	preco_total	DOUBLE PRECISION,
 	FOREIGN KEY 	(codigo_cliente) REFERENCES Cliente(codigo) ON DELETE SET NULL ON UPDATE SET NULL
 );
 

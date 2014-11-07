@@ -22,9 +22,12 @@ $(document).ready(function () {
     });
     
     $(".BotaoAdd").click(function () {
-        var cod = $(this).parent().prev().prev().prev().html();
+        var cod = $(this).parent().prev().prev().prev().prev().html();
         var qtde = $(this).prev().val();
-        var nome = $(this).parent().prev().prev().html();
+        var nome = $(this).parent().prev().prev().prev().html();
+        var aux = $(this).parent().prev().prev().html().split(' ');
+        var preco = parseFloat(aux[1]);
+        var total = parseFloat($('#total').html());
         var app;
         
         var max = $(this).prev().attr("max");
@@ -38,14 +41,24 @@ $(document).ready(function () {
                 data.trim();
                 var arr = data.split('#');
                 if(arr.length == 5){
-                    app = "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+arr[4]+"</td><td>"+arr[1]+"</td><td>"+arr[2]+"</td><td>"+arr[3]+"</td></tr>";
+                    app = "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+arr[4]+"</td><td>"+arr[1]+"</td><td>"+arr[2]+"</td><td>"+arr[3]+"</td><td>"+(preco*parseFloat(arr[4]))+"</td></tr>";
+                    total = total + (preco*parseFloat(arr[4]));
+                    $('#total').html(total);
+                    $('#flagTotal').val(total);
                 }else{
                     i = 1;
                     while(i < arr.length){
-                        if((i+4) >= arr.length )
-                            app = app + "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+qtde+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td></tr>";
-                        else
-                            app = app + "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+arr[i+3]+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td></tr>";
+                        if((i+4) >= arr.length ) {
+                            app = app + "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+qtde+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td><td>"+(preco*parseFloat(qtde))+"</td></tr>";
+                            total = total + (preco*parseFloat(qtde));
+                            $('#total').html(total);
+                            $('#flagTotal').val(total);
+                        } else {
+                            app = app + "<tr class='gradeA'><td>"+cod+"</td><td>"+nome+"</td><td>"+arr[i+3]+"</td><td>"+arr[i]+"</td><td>"+arr[i+1]+"</td><td>"+arr[i+2]+"</td><td>"+(preco*parseFloat(arr[i+3]))+"</td></tr>";
+                            total = total + (preco*parseFloat(arr[i+3]));
+                            $('#total').html(total);
+                            $('#flagTotal').val(total);
+                        }
                         qtde = qtde-arr[i+3];
                         i = i+4;
                     }
@@ -112,6 +125,7 @@ $(document).ready(function () {
         var cli = $('#SelCliente').val();
         var lotes = "";
         var quantidade = "";
+        var total = $('#flagTotal').val();
         
         var apontador = $('#TabelaVenda').children().next().children();
         while(apontador.children().length > 0){
@@ -134,6 +148,7 @@ $(document).ready(function () {
             '<input type="hidden" name="cliente" value="'+cli+'">' +
             '<input type="hidden" name="quantidade" value="'+quantidade+'">' +
             '<input type="hidden" name="lotes" value="'+lotes+'">' +
+            '<input type="hidden" name="total" value="'+total+'">' +
             '</form>').submit();
         
 //        $.ajax({

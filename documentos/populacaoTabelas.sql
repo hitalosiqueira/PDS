@@ -1,21 +1,21 @@
-﻿-- ERP Array Enterprises - População do banco de dados "ERPArrayEnterprises"
+﻿-- ERP Array Enterprises - População inicial para o banco de dados "ERPArrayEnterprises"
 
 -- Arquivo: populacaoTabelas.sql
 
 INSERT INTO Produto VALUES
-	(1, 'Dipirona'),
-	(2, 'Mertiolate'),
-	(3, 'Farinha de trigo'),
-	(4, 'Arroz Integral Tipo I'),
-	(5, 'Arroz Integral Tipo II'),
-	(6, 'Açucar Cristal'),
-	(7, 'Milho Enlatado'), 
-	(8, 'Feijão Carioca'),
-	(9, 'Feijão Preto'),
-	(10, 'Dorflex'),
-	(11, 'Pão de Hamburger'),
-	(12, 'Hamburger'),
-	(13, 'Queijo Cheddar');
+	(1, 'Dipirona', 2.50),
+	(2, 'Mertiolate', 5.60),
+	(3, 'Farinha de trigo', 3.99),
+	(4, 'Arroz Integral Tipo I', 7.99),
+	(5, 'Arroz Integral Tipo II', 10.50),
+	(6, 'Açucar Cristal', 4.70),
+	(7, 'Milho Enlatado', 2.20), 
+	(8, 'Feijão Carioca', 6.70),
+	(9, 'Feijão Preto', 7.00),
+	(10, 'Dorflex', 3.50),
+	(11, 'Pão de Hamburger', 2.99),
+	(12, 'Hamburger', 1.50),
+	(13, 'Queijo Cheddar', 8.90);
 
 INSERT INTO Cliente VALUES
 	(1, 'Supermercado Nagumo', 'Alimentício', 'Supermercado'),
@@ -48,3 +48,13 @@ INSERT INTO Lote VALUES
 
 INSERT INTO Usuario VALUES
         ('jabuti', '123456');
+
+INSERT INTO Venda VALUES
+(1,3, 2559.00),
+(2,4, 402.00);
+
+INSERT INTO Produtos_venda VALUES
+(1,3,400),
+(1,4,70),
+(1,5,60),
+(2, 4, 60);

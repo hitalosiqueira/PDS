@@ -9,13 +9,12 @@ package model;
  *
  * @author daniel
  */
-public class Produto {
-
-    
+public class Produto {    
     
     private int codigo;
     private String nome;
     private int quantidade;
+    private Double preco_unit;
     
     //metodos
     
@@ -41,5 +40,13 @@ public class Produto {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Double getPreco_unit() {
+        return preco_unit;
+    }
+
+    public void setPreco_unit(Double preco_unit) {
+        this.preco_unit = preco_unit;
     }
 }
