@@ -55,8 +55,7 @@
             <div id="page-wrapper" style="margin-left: 0">
                 <div id="VendasEfetuadas">
                     <div class="row">
-                        <div class="col-lg-3"></div>
-                        <div class="col-lg-6" style="margin-top: 10px;">
+                        <div class="col-lg-9 col-centered" style="margin-top: 10px;">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row" style="text-align: center;">

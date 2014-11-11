@@ -36,7 +36,11 @@ public class ServletLote extends HttpServlet {
             int codigo = Integer.parseInt(request.getParameter("codigo"));
             int quantidade = Integer.parseInt(request.getParameter("quantidade"));
             addLotes(request, response, codigo, quantidade);            
-        }        
+        }
+        if(tipo.equals("addM")){
+            int codigo = Integer.parseInt(request.getParameter("codigo"));
+            addLoteM(request, response, codigo);            
+        } 
     }
 
     private void addLotes(HttpServletRequest request, HttpServletResponse response, int codigo, int quantidade) throws IOException{
@@ -65,6 +69,21 @@ public class ServletLote extends HttpServlet {
                 qtde-=lote.getQtde_atual();
             }
         }
+        
+        PrintWriter writer = response.getWriter();
+        writer.print(resultado);
+        writer.close();
+    }
+    
+    private void addLoteM(HttpServletRequest request, HttpServletResponse response, int codigo) throws IOException{
+        
+        Lote lote = new Lote();
+        LoteDAO lotedao = new LoteDAO();
+        String resultado = null;
+        
+        lote = lotedao.buscaLote(codigo);
+        
+        resultado= ""+lote.getDt_fabricacao();
         
         PrintWriter writer = response.getWriter();
         writer.print(resultado);

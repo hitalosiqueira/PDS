@@ -12,9 +12,13 @@
 CREATE TABLE Produto(
 	codigo		INT PRIMARY KEY,
 	nome		VARCHAR(50),
-	preco_unit	DOUBLE PRECISION
+	preco_unit	DOUBLE PRECISION,
+	ramo 		INT
 );
 
+
+-- ramo 1 = alimenticio
+-- ramo 2 = medicamentos
 CREATE TABLE Cliente(
 	codigo		INT PRIMARY KEY,
 	nome		VARCHAR(50),

@@ -22,10 +22,10 @@ public class ProdutoDAO {
     private Connection c = ConnectionFactory.getConexao();
 
     public List<Produto> buscaTodos() {
-        String sql = "select l.codigo_produto, p.nome, sum(qtde_atual) as qtdetotal, p.preco_unit as preco\n" +
+        String sql = "select l.codigo_produto, p.nome, sum(qtde_atual) as qtdetotal, p.preco_unit as preco , p.ramo as ramo\n" +
                     "	from lote l, produto p\n" +
                     "	where l.codigo_produto = p.codigo and l.dt_validade > current_date\n" +
-                    "	group by l.codigo_produto, p.nome, p.preco_unit\n" +
+                    "	group by l.codigo_produto, p.nome, p.preco_unit, p.ramo\n" +
                     "	order by l.codigo_produto";
         List<Produto> lista = new ArrayList<>();
         
@@ -40,6 +40,7 @@ public class ProdutoDAO {
                 prod.setNome(resultado.getString("nome"));
                 prod.setQuantidade(Integer.parseInt(resultado.getString("qtdetotal")));
                 prod.setPreco_unit(resultado.getDouble("preco"));
+                prod.setRamo(resultado.getInt("ramo"));
                 lista.add(prod);
             }
             p.close();
@@ -54,17 +55,18 @@ public class ProdutoDAO {
     
     public Produto buscaCodigo(int codigo) {
         String sql = "SELECT * FROM produto WHERE codigo ="+codigo;
-        Produto pro = new Produto();
+        Produto prod = new Produto();
 
         try {
             PreparedStatement p = c.prepareStatement(sql);
             ResultSet resultado = p.executeQuery();
-            Produto prod = new Produto();
+            prod = new Produto();
             
             while (resultado.next()) {
                 prod.setCodigo(resultado.getInt("codigo"));
                 prod.setNome(resultado.getString("nome"));
                 prod.setPreco_unit(resultado.getDouble("preco_unit"));
+                prod.setRamo(resultado.getInt("ramo"));
             }
             
             p.close();
@@ -73,7 +75,6 @@ public class ProdutoDAO {
             System.out.println("falha na busca");
             ex.printStackTrace();
         }
-
-        return pro;
+        return prod;
     }
 }

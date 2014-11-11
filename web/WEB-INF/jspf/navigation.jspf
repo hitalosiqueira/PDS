@@ -31,8 +31,11 @@
                     <a class="active" href="#" id="BotaoEfetuadas"><i class="fa fa-table fa-fw"></i> Vendas Efetuadas</a>
                 </li>
                 <li>
-                    <a href="#" id="BotaoNovo"><i class="fa fa-edit fa-fw"></i> Nova Venda</a>
-                </li>                        
+                    <a href="#" id="BotaoNovo"><i class="fa fa-tasks fa-fw"></i> Venda Automática</a>
+                </li>
+                <li>
+                    <a href="#" id="BotaoNovoM"><i class="fa fa-edit fa-fw"></i> Venda Manual</a>
+                </li>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

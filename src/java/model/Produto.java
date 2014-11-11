@@ -15,6 +15,7 @@ public class Produto {
     private String nome;
     private int quantidade;
     private Double preco_unit;
+    private int ramo; // 1=alimenticio  2=medicamentos
     
     //metodos
     
@@ -48,5 +49,13 @@ public class Produto {
 
     public void setPreco_unit(Double preco_unit) {
         this.preco_unit = preco_unit;
+    }
+
+    public int getRamo() {
+        return ramo;
+    }
+
+    public void setRamo(int ramo) {
+        this.ramo = ramo;
     }
 }

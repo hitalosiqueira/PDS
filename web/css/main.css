@@ -22,3 +22,8 @@ body{
 #page-wrapper{
     min-height: calc(100% - 51px);
 }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}

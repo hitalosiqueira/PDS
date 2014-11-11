@@ -6,6 +6,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,9 +30,10 @@ public class ServletMain extends HttpServlet {
         
         String tipo= (String)request.getParameter("tipo");
         
-        if (tipo.compareTo("carrega")==0) {
+        if (tipo.compareTo("carrega")==0)
             carregaMain(request, response);
-        }
+        if (tipo.compareTo("tipo")==0)
+            tipoCli(request, response);
     }
     
     @Override
@@ -50,6 +52,11 @@ public class ServletMain extends HttpServlet {
         produtos = produtodao.buscaTodos();
         request.setAttribute("listProdutos", produtos);
         
+        LoteDAO lotedao = new LoteDAO();
+        List<Lote> lotes = null;
+        lotes = lotedao.listaLotes();
+        request.setAttribute("listLotes", lotes);
+        
         ClienteDAO clientedao = new ClienteDAO();
         List<Cliente> clientes = null;
         clientes = clientedao.buscaTodos();
@@ -63,5 +70,17 @@ public class ServletMain extends HttpServlet {
         RequestDispatcher rd = null;
         rd = request.getRequestDispatcher("/main.jsp");
         rd.forward(request, response);
+    }
+    
+    private void tipoCli(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        Cliente cli = new Cliente();
+        cli.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+        
+        ClienteDAO clientedao = new ClienteDAO();
+        int res = clientedao.buscaTipo(cli.getCodigo());
+        
+        PrintWriter writer = response.getWriter();
+        writer.print(res);
+        writer.close();
     }
 }

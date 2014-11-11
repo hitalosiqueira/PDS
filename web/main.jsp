@@ -80,24 +80,24 @@
                     <div class="row">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <div class="col-lg-6" style="margin-bottom: 20px;">
+                                <div class="col-lg-6">
                                     <div class="pull-left" style="margin-top: 7px;"><b>Cliente:</b></div>
-                                        <select class="form-control" style="width: 200px;" id="SelCliente">
-                                            <option value="-1">Selecione um cliente</option>
-                                            <%
-                                                List<Cliente> clientes = (List<Cliente>) request.getAttribute("listClientes");
-                                                if (!clientes.isEmpty()) {
-                                                    for (Iterator iterator = clientes.iterator(); iterator.hasNext();) {
-                                                        Cliente cli = (Cliente) iterator.next();
-                                            %>
-                                            <option value="<%=cli.getCodigo()%>"><%=cli.getNome()%></option>
-                                            <%
-                                                    }
+                                    <select class="form-control" style="width: 200px;" id="SelCliente">
+                                        <option value="-1">Selecione um cliente</option>
+                                        <%
+                                            List<Cliente> clientes = (List<Cliente>) request.getAttribute("listClientes");
+                                            if (!clientes.isEmpty()) {
+                                                for (Iterator iterator = clientes.iterator(); iterator.hasNext();) {
+                                                    Cliente cli = (Cliente) iterator.next();
+                                        %>
+                                        <option value="<%=cli.getCodigo()%>"><%=cli.getNome()%></option>
+                                        <%
                                                 }
-                                            %>
-                                        </select>
+                                            }
+                                        %>
+                                    </select>
                                 </div>
-                                <div class="col-lg-6 alert alert-warning" role="alert" id="AlertVenda">
+                                <div class="col-lg-6 alert alert-warning" role="alert" id="AlertVenda" style="margin : 0;">
                                     <h4>É necessário selecionar o cliente e ao menos um produto para realizar uma venda. =)</h4>
                                 </div>
                             </div>
@@ -105,8 +105,9 @@
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row -->
-                    <div class="row">
-                        <div class="col-lg-6">
+                    <!-- PARTE DE VENDAS AUTOMATICAS -->
+                    <div class="row" id="panelVendas">
+                        <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Produtos</h3>
@@ -115,8 +116,8 @@
                                     <table class="display" id="TableProdutos">
                                         <thead>
                                             <tr>
-                                                <th>#Código</th>
-                                                <th>Nome</th>
+                                                <th></th>
+                                                <th>Produto</th>
                                                 <th>Valor</th>
                                                 <th>Qtde. disponível</th>
                                                 <th>Sel. quantidade</th>
@@ -129,14 +130,14 @@
                                                     for (Iterator iterator = produtos.iterator(); iterator.hasNext();) {
                                                         Produto produto = (Produto) iterator.next();
                                             %>
-                                            <tr class="gradeA">
+                                            <tr class="gradeA <%=produto.getRamo()%>">
                                                 <td><%=produto.getCodigo()%></td>
                                                 <td><%=produto.getNome()%></td>
                                                 <td>R$ <%=produto.getPreco_unit()%></td>
                                                 <td><%=produto.getQuantidade()%></td>
                                                 <td>
                                                     <input type="number" id="QtdeProd" min="0" max="<%=produto.getQuantidade()%>" value="1" style="width: 50px;">
-                                                    <button type="button" class="btn btn-primary btn-xs pull-right BotaoAdd">Add. >></button>
+                                                    <button type="button" class="btn btn-primary btn-xs pull-right BotaoAdd">>></button>
                                                 </td>
                                             </tr>
                                             <%
@@ -148,7 +149,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Itens na Venda</h3>
@@ -157,8 +158,8 @@
                                     <table class="table table-striped table-hover" id="TabelaVenda">
                                         <thead>
                                             <tr>
-                                                <th>#Código</th>
-                                                <th>Nome</th>
+                                                <th></th>
+                                                <th>Produto</th>
                                                 <th>Qtde.</th>
                                                 <th>Lote</th>
                                                 <th>Fabricação</th>
@@ -166,7 +167,7 @@
                                                 <th>Valor</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="ProdutosVenda">
                                         </tbody>
                                     </table>
                                     <div class="row">
@@ -174,7 +175,125 @@
                                             <label>Valor total: <p class='btn btn-info'id="total">0</p></label>
                                             <input type="hidden" id="flagTotal" value="0">
                                             <input type="hidden" id="flagProduto" value="0">
-                                            <button class="btn btn-success pull-right" id="FinalizaVenda">Finalizar Venda</button>
+                                            <button class="btn btn-success pull-right" id="FinalizaVenda" disabled>Finalizar Venda</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PARTE DE VENDAS MANUAIS POR LOTE -->
+                <div id="NovaVendaM">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Nova Venda Manual</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <div class="pull-left" style="margin-top: 7px;"><b>Cliente:</b></div>
+                                    <select class="form-control" style="width: 200px;" id="SelClienteM">
+                                        <option value="-1">Selecione um cliente</option>
+                                        <%
+                                            clientes = (List<Cliente>) request.getAttribute("listClientes");
+                                            if (!clientes.isEmpty()) {
+                                                for (Iterator iterator = clientes.iterator(); iterator.hasNext();) {
+                                                    Cliente cli = (Cliente) iterator.next();
+                                        %>
+                                        <option value="<%=cli.getCodigo()%>"><%=cli.getNome()%></option>
+                                        <%
+                                                }
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 alert alert-warning" role="alert" id="AlertVendaM" style="margin : 0;">
+                                    <h4>É necessário selecionar o cliente e ao menos um produto para realizar uma venda. =)</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row" id="panelVendasM">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Produtos</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="display" id="TableProdutosM">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Produto</th>
+                                                <th>Lote</th>
+                                                <th>Val.</th>
+                                                <th>Valor</th>
+                                                <th>Qtde. disponível</th>
+                                                <th>Sel. quantidade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                List<Lote> lotes = (List<Lote>) request.getAttribute("listLotes");
+                                                if (!lotes.isEmpty()) {
+                                                    for (Iterator iterator = lotes.iterator(); iterator.hasNext();) {
+                                                        Lote lote = (Lote) iterator.next();
+                                                        Produto prod = lote.getProduto();
+                                            %>
+                                            <tr class="gradeA <%=prod.getRamo()%>">
+                                                <td><%=prod.getCodigo()%></td>
+                                                <td><%=prod.getNome()%></td>
+                                                <td><%=lote.getCodigo()%></td>
+                                                <td><%=lote.getDt_validade()%></td>
+                                                <td>R$ <%=prod.getPreco_unit()%></td>
+                                                <td><%=lote.getQtde_atual()%></td>
+                                                <td>
+                                                    <input type="number" id="QtdeProdM" min="0" max="<%=lote.getQtde_atual()%>" value="1" style="width: 50px;">
+                                                    <button type="button" class="btn btn-primary btn-xs pull-right BotaoAddM">>></button>
+                                                </td>
+                                            </tr>
+                                            <%
+                                                    }
+                                                }
+                                            %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Itens na Venda</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-striped table-hover" id="TabelaVendaM">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Produto</th>
+                                                <th>Qtde.</th>
+                                                <th>Lote</th>
+                                                <th>Fabricação</th>
+                                                <th>Validade</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ProdutosVendaM">
+                                        </tbody>
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Valor total: <p class='btn btn-info'id="totalM">0</p></label>
+                                            <input type="hidden" id="flagTotalM" value="0">
+                                            <input type="hidden" id="flagProdutoM" value="0">
+                                            <button class="btn btn-success pull-right" id="FinalizaVendaM" disabled>Finalizar Venda</button>
                                         </div>
                                     </div>
                                 </div>

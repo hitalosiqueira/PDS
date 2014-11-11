@@ -21,6 +21,33 @@ public class LoteDAO {
 
     private Connection c = ConnectionFactory.getConexao();
 
+    public Lote buscaLote(int codigo) {
+        String sql = "SELECT * FROM lote WHERE codigo = "+codigo;
+        List<Lote> lista = new ArrayList<>();
+        Lote l = new Lote();
+
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet resultado = p.executeQuery();
+
+            while (resultado.next()) {
+                l.setCodigo(resultado.getInt("codigo"));
+                l.setDt_fabricacao(resultado.getDate("dt_fabricacao"));
+                l.setDt_validade(resultado.getDate("dt_validade"));
+                l.setQtde_pedido(resultado.getInt("quantidade"));
+                
+                lista.add(l);
+            }
+            p.close();
+            System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
+        }
+
+        return l;
+    }
+    
     public List<Lote> buscaLotesVenda(int codigo) {
         String sql = "SELECT l.codigo, p.codigo as codigo_produto, p.nome, p.preco_unit, pv.quantidade, l.dt_fabricacao, l.dt_validade FROM produtos_venda pv, lote l, produto p WHERE l.codigo = pv.codigo_lote AND l.codigo_produto = p.codigo AND pv.codigo_venda ="+codigo;
         List<Lote> lista = new ArrayList<>();
@@ -72,6 +99,39 @@ public class LoteDAO {
             }
             p.close();
             System.out.println("busca realizada com sucesso");
+        } catch (SQLException ex) {
+            System.out.println("falha na busca");
+            ex.printStackTrace();
+        }
+
+        return lista;
+    }
+    
+    public List<Lote> listaLotes() {
+        String sql = "SELECT * FROM lote where qtde_atual > 0 and dt_validade > CURRENT_DATE ORDER BY codigo_produto, codigo";
+        List<Lote> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet resultado = p.executeQuery();
+
+            while (resultado.next()) {
+                Lote l = new Lote();
+                ProdutoDAO prodao = new ProdutoDAO();
+                int pro = resultado.getInt("codigo_produto");
+                Produto prod = prodao.buscaCodigo(pro);
+                
+                System.out.println(prod.getNome());
+                l.setProduto(prod);
+                l.setCodigo(resultado.getInt("codigo"));
+                l.setDt_fabricacao(resultado.getDate("dt_fabricacao"));
+                l.setDt_validade(resultado.getDate("dt_validade"));
+                l.setQtde_inicial(resultado.getInt("qtde_inicial"));
+                l.setQtde_atual(resultado.getInt("qtde_atual"));
+                lista.add(l);
+            }
+            p.close();
+            System.out.println("busca realizada com sucesso LOTESSS");
         } catch (SQLException ex) {
             System.out.println("falha na busca");
             ex.printStackTrace();
