@@ -29,44 +29,6 @@ public class UsuarioDAO {
         }
     }
 
-//    // inclui filme no BD
-//    public void salvar(UsuarioBean usuario) throws DAOException {
-//
-//        Statement ps = null;
-//        Connection conn = null;
-//
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            String conexao = "jdbc:mysql://localhost:3306/web2";
-//            String usuarioa = "root", senha = "1234";
-//            conn = DriverManager.getConnection(conexao, usuarioa, senha);
-//        } catch (Exception e) {
-//            System.err.println(e);
-//        }
-//
-//        if (usuario == null) {
-//            throw new DAOException("O valor passado nÃ£o pode ser nulo");
-//        }
-//
-//        try {
-//            String nome = usuario.getNome();
-//            String email = usuario.getEmail();
-//            String senha = usuario.getSenha();
-//
-//            //MUDAR AQUI A QUERRY
-//            String SQL = "INSERT INTO `usuario`(`email`, `senha`, `nome`) VALUES ('" + email + "','" + senha + "','" + nome + "');";
-//
-//            ps = conn.createStatement();
-//            ps.executeUpdate(SQL);
-//
-//        } catch (SQLException sqle) {
-//            throw new DAOException("Erro ao inserir dados " + sqle);
-//        } finally {
-//            ConnectionFactory.closeConnection(conn, ps);
-//
-//        }
-//    }// fim salvar
-
     public boolean isUsuarioValido(Usuario usuario, int x) throws DAOException, SQLException {
 
         String login = usuario.getLogin();

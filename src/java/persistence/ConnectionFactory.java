@@ -27,7 +27,6 @@ public class ConnectionFactory {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(DATABASE_URL,"postgres","123");
-            System.out.println("Conexão feita com sucesso");
         } catch (SQLException ex) {
             System.out.println("Falha na Conexão");
             ex.printStackTrace();

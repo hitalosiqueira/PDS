@@ -6,19 +6,19 @@
 -- ramo 1 = alimenticio
 -- ramo 2 = medicamentos
 INSERT INTO Produto VALUES
-	(1, 'Dipirona', 2.50, 2),
-	(2, 'Mertiolate', 5.60, 2),
-	(3, 'Farinha de trigo', 3.99, 1),
-	(4, 'Arroz Integral Tipo I', 7.99, 1),
-	(5, 'Arroz Integral Tipo II', 10.50, 1),
-	(6, 'Açucar Cristal', 4.70, 1),
-	(7, 'Milho Enlatado', 2.20, 1), 
-	(8, 'Feijão Carioca', 6.70, 1),
-	(9, 'Feijão Preto', 7.00, 1),
-	(10, 'Dorflex', 3.50, 2),
-	(11, 'Pão de Hamburger', 2.99, 1),
-	(12, 'Hamburger', 1.50, 1),
-	(13, 'Queijo Cheddar', 8.90, 1);
+	(1, 'Dipirona', 2.50, 2, 10),
+	(2, 'Mertiolate', 5.00, 2, 10),
+	(3, 'Farinha de trigo', 3.00, 1, 10),
+	(4, 'Arroz Integral Tipo I', 7.50, 1, 10),
+	(5, 'Arroz Integral Tipo II', 10.50, 1, 10),
+	(6, 'Açucar Cristal', 4.00, 1, 10),
+	(7, 'Milho Enlatado', 2.00, 1, 10),
+	(8, 'Feijão Carioca', 6.50, 1, 10),
+	(9, 'Feijão Preto', 7.00, 1, 10),
+	(10, 'Dorflex', 3.50, 2, 10),
+	(11, 'Pão de Hamburger', 2.00, 1, 10),
+	(12, 'Hamburger', 3.50, 1, 10),
+	(13, 'Queijo Cheddar', 8.50, 1, 10);
 
 INSERT INTO Cliente VALUES
 	(1, 'Supermercado Nagumo', 'Alimentício', 'Supermercado'),

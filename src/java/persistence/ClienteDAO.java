@@ -40,9 +40,7 @@ public class ClienteDAO {
             }
             
             p.close();
-            System.out.println("busca realizada com sucesso");
         } catch (SQLException ex) {
-            System.out.println("falha na busca");
             ex.printStackTrace();
         }
 
@@ -65,9 +63,7 @@ public class ClienteDAO {
             }
             
             p.close();
-            System.out.println("busca realizada com sucesso");
         } catch (SQLException ex) {
-            System.out.println("falha na busca");
             ex.printStackTrace();
         }
 
@@ -90,9 +86,7 @@ public class ClienteDAO {
             }
             
             p.close();
-            System.out.println("busca realizada com sucesso");
         } catch (SQLException ex) {
-            System.out.println("falha na busca");
             ex.printStackTrace();
         }
 

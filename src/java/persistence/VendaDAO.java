@@ -55,9 +55,7 @@ public class VendaDAO {
 
             }
             p.close();
-            System.out.println("busca realizada com sucesso");
         } catch (SQLException ex) {
-            System.out.println("falha na busca");
             ex.printStackTrace();
         }
 
@@ -92,9 +90,7 @@ public class VendaDAO {
                 v.setPreco_total(resultado.getDouble("valor"));
             }
             p.close();
-            System.out.println("busca realizada com sucesso");
         } catch (SQLException ex) {
-            System.out.println("falha na busca");
             ex.printStackTrace();
         }
 
@@ -139,11 +135,7 @@ public class VendaDAO {
  
             p.close();
             ps.close();
-            
-            System.out.println("venda realizada com sucesso");
-
         } catch (SQLException ex) {
-            
             System.out.println("falha na venda");
         }
         return codigo_venda;

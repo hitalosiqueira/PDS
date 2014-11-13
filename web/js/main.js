@@ -278,4 +278,15 @@ $(document).ready(function () {
             "infoEmpty":      "Não há produtos cadastrados."
         }
     });
+    
+    $(".salvaLimite").click(function () {
+        var id = $(this).prev().attr('id');
+        var limite = $(this).prev().val();
+        
+        $('<form action="ServletProduto" method="POST">' + 
+            '<input type="hidden" name="tipo" value="alteraLimite">' +
+            '<input type="hidden" name="id" value="'+id+'">' +
+            '<input type="hidden" name="limite" value="'+limite+'">' +
+            '</form>').submit();
+    });
 });

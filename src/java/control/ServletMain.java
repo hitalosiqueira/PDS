@@ -52,6 +52,10 @@ public class ServletMain extends HttpServlet {
         produtos = produtodao.buscaTodos();
         request.setAttribute("listProdutos", produtos);
         
+        List<Produto> produtosV = null;
+        produtos = produtodao.buscaTodosV();
+        request.setAttribute("listProdutosV", produtos);
+        
         LoteDAO lotedao = new LoteDAO();
         List<Lote> lotes = null;
         lotes = lotedao.listaLotes();

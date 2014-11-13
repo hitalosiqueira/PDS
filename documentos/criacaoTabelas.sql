@@ -13,7 +13,8 @@ CREATE TABLE Produto(
 	codigo		INT PRIMARY KEY,
 	nome		VARCHAR(50),
 	preco_unit	DOUBLE PRECISION,
-	ramo 		INT
+	ramo 		INT,
+	limite		INT
 );
 
 

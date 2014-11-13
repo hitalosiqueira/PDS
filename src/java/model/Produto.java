@@ -16,6 +16,7 @@ public class Produto {
     private int quantidade;
     private Double preco_unit;
     private int ramo; // 1=alimenticio  2=medicamentos
+    private int limite; // limite de dias para a validade, utilizado na venda automatica
     
     //metodos
     
@@ -57,5 +58,13 @@ public class Produto {
 
     public void setRamo(int ramo) {
         this.ramo = ramo;
+    }
+
+    public int getLimite() {
+        return limite;
+    }
+
+    public void setLimite(int limite) {
+        this.limite = limite;
     }
 }

@@ -21,17 +21,64 @@
                 login = (Usuario) s.getAttribute("Usuario");
             }
         %>
+        <div class="modal fade" id="modalLimite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+                        <h4 class="modal-title">Alterar limite de dias próximo à validade para a venda automática.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Limite de dias</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        List<Produto> produtos = (List<Produto>) request.getAttribute("listProdutos");
+                                        if (!produtos.isEmpty()) {
+                                            for (Iterator iterator = produtos.iterator(); iterator.hasNext();) {
+                                                Produto produto = (Produto) iterator.next();
+                                    %>
+                                    <tr>
+                                        <td><%=produto.getNome()%></td>
+                                        <td>
+                                            <input type="number" min="0" style="width: 50px; margin-left: 25px;" value='<%=produto.getLimite()%>' id='<%=produto.getCodigo()%>'>
+                                            <button type="button" class="btn btn-sm btn-success pull-right salvaLimite">Salvar alteração</button>
+                                        </td>
+                                    </tr>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         <div id="wrapper">
             <%@include file="WEB-INF/jspf/navigation.jspf"%>
             <div id="page-wrapper">
+                <!--
+                  --
+                  -- Area de vendas concluidas
+                  --
+                  -->
                 <div id="VendasEfetuadas">
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">Vendas Efetuadas</h1>
                         </div>
-                        <!-- /.col-lg-12 -->
                     </div>
-                    <!-- /.row -->
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
@@ -70,12 +117,16 @@
                         </div>
                     </div>
                 </div>
+                <!--
+                  --
+                  -- Area de vendas automaticas
+                  --
+                  -->
                 <div id="NovaVenda">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Nova Venda</h1>
+                            <h1 class="page-header">Nova Venda Automatica  <button class="btn btn-info glyphicon glyphicon-cog" data-toggle="modal" data-target="#modalLimite" style="text-align: left;"> Limite de dias</button></h1>
                         </div>
-                        <!-- /.col-lg-12 -->
                     </div>
                     <div class="row">
                         <div class="panel panel-default">
@@ -102,10 +153,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /.col-lg-12 -->
                     </div>
-                    <!-- /.row -->
-                    <!-- PARTE DE VENDAS AUTOMATICAS -->
                     <div class="row" id="panelVendas">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
@@ -125,9 +173,9 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                List<Produto> produtos = (List<Produto>) request.getAttribute("listProdutos");
-                                                if (!produtos.isEmpty()) {
-                                                    for (Iterator iterator = produtos.iterator(); iterator.hasNext();) {
+                                                List<Produto> produtosV = (List<Produto>) request.getAttribute("listProdutosV");
+                                                if (!produtosV.isEmpty()) {
+                                                    for (Iterator iterator = produtosV.iterator(); iterator.hasNext();) {
                                                         Produto produto = (Produto) iterator.next();
                                             %>
                                             <tr class="gradeA <%=produto.getRamo()%>">
@@ -183,13 +231,16 @@
                         </div>
                     </div>
                 </div>
-                <!-- PARTE DE VENDAS MANUAIS POR LOTE -->
+                <!--
+                  --
+                  -- Area de vendas manuais por lote
+                  --
+                  -->
                 <div id="NovaVendaM">
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">Nova Venda Manual</h1>
                         </div>
-                        <!-- /.col-lg-12 -->
                     </div>
                     <div class="row">
                         <div class="panel panel-default">
@@ -216,9 +267,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /.col-lg-12 -->
                     </div>
-                    <!-- /.row -->
                     <div class="row" id="panelVendasM">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
@@ -301,7 +350,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- /#wrapper -->
             </div>
         </div>
     </body>
